@@ -66,7 +66,7 @@ export default async function handler(req, res) {
 }
 
 /**
- * Native Google AI Studio (Gemini) integration with dynamic ModelService.ListModels discovery
+ * Native Google AI Studio (Gemini 3.6 Flash) integration
  */
 async function callGemini(apiKey, messages) {
     let systemInstruction = '';
@@ -95,7 +95,6 @@ async function callGemini(apiKey, messages) {
     const payload = {
         contents,
         generationConfig: {
-            temperature: 0.7,
             maxOutputTokens: 450
         }
     };
@@ -106,64 +105,10 @@ async function callGemini(apiKey, messages) {
         };
     }
 
-    // Step 1: Query ListModels dynamically to get the exact models active for this specific key
-    let targetModelPath = process.env.GEMINI_MODEL ? `models/${process.env.GEMINI_MODEL.replace(/^models\//, '')}` : null;
+    // Directly target Google's active Gemini 3.6 Flash model
+    const model = (process.env.GEMINI_MODEL || 'gemini-3.6-flash').replace(/^models\//, '');
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-    if (!targetModelPath) {
-        try {
-            const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-            const listData = await listRes.json();
-
-            if (listData?.error?.message) {
-                throw new Error(`Google AI Studio error: ${listData.error.message}`);
-            }
-
-            if (listData.models && Array.isArray(listData.models)) {
-                // Filter models supporting generateContent and suitable for text chat
-                const chatModels = listData.models.filter(m => 
-                    Array.isArray(m.supportedGenerationMethods) && 
-                    m.supportedGenerationMethods.includes('generateContent') &&
-                    !m.name.includes('embedding') &&
-                    !m.name.includes('aqa') &&
-                    !m.name.includes('imagen')
-                );
-
-                if (chatModels.length > 0) {
-                    // Priority preference list of current models (Gemini 3.6 Flash primary)
-                    const preferred = [
-                        'models/gemini-3.6-flash',
-                        'models/gemini-3.6',
-                        'models/gemini-3.5-flash',
-                        'models/gemini-3.5-pro',
-                        'models/gemini-2.0-flash',
-                        'models/gemini-2.0-flash-exp',
-                        'models/gemini-2.5-flash',
-                        'models/gemini-1.5-flash-latest',
-                        'models/gemini-1.5-flash-002',
-                        'models/gemini-1.5-flash'
-                    ];
-
-                    const found = preferred.find(p => chatModels.some(m => m.name === p));
-                    targetModelPath = found || chatModels[0].name;
-                } else {
-                    const names = listData.models.map(m => m.name).join(', ');
-                    throw new Error(`No models with generateContent found for this key. Available models: [${names}]`);
-                }
-            }
-        } catch (err) {
-            console.warn('ListModels query failed or completed with note:', err.message);
-            if (err.message.startsWith('Google AI Studio error') || err.message.startsWith('No models')) {
-                throw err;
-            }
-        }
-    }
-
-    if (!targetModelPath) {
-        targetModelPath = 'models/gemini-3.6-flash';
-    }
-
-    // Step 2: Call the selected model
-    const url = `https://generativelanguage.googleapis.com/v1beta/${targetModelPath}:generateContent?key=${apiKey}`;
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -173,7 +118,7 @@ async function callGemini(apiKey, messages) {
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error(data?.error?.message || `Gemini Error (${response.status}) on ${targetModelPath}`);
+        throw new Error(data?.error?.message || `Gemini Error (${response.status}) on ${model}`);
     }
 
     const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
