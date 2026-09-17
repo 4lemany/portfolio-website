@@ -66,7 +66,7 @@ export default async function handler(req, res) {
 }
 
 /**
- * Native Google AI Studio (Gemini) integration with automatic model fallback
+ * Native Google AI Studio (Gemini) integration with dynamic ModelService.ListModels discovery
  */
 async function callGemini(apiKey, messages) {
     let systemInstruction = '';
@@ -88,7 +88,6 @@ async function callGemini(apiKey, messages) {
         }
     }
 
-    // Ensure at least one user message
     if (contents.length === 0) {
         contents.push({ role: 'user', parts: [{ text: 'Hello' }] });
     }
@@ -107,66 +106,92 @@ async function callGemini(apiKey, messages) {
         };
     }
 
-    // Models ordered by priority: Gemini 2.0 Flash is the modern standard on AI Studio
-    const candidateModels = [
-        process.env.GEMINI_MODEL,
-        'gemini-2.0-flash',
-        'gemini-2.0-flash-exp',
-        'gemini-2.5-flash',
-        'gemini-1.5-flash-latest',
-        'gemini-1.5-flash-002',
-        'gemini-1.5-flash',
-        'gemini-1.5-pro'
-    ].filter(Boolean);
+    // Step 1: Query ListModels dynamically to get the exact models active for this specific key
+    let targetModelPath = process.env.GEMINI_MODEL ? `models/${process.env.GEMINI_MODEL.replace(/^models\//, '')}` : null;
 
-    let lastError = null;
+    if (!targetModelPath) {
+        try {
+            const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+            const listData = await listRes.json();
 
-    for (const model of candidateModels) {
-        for (const apiVersion of ['v1beta', 'v1']) {
-            try {
-                const url = `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:generateContent?key=${apiKey}`;
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+            if (listData?.error?.message) {
+                throw new Error(`Google AI Studio error: ${listData.error.message}`);
+            }
 
-                const data = await response.json();
+            if (listData.models && Array.isArray(listData.models)) {
+                // Filter models supporting generateContent and suitable for text chat
+                const chatModels = listData.models.filter(m => 
+                    Array.isArray(m.supportedGenerationMethods) && 
+                    m.supportedGenerationMethods.includes('generateContent') &&
+                    !m.name.includes('embedding') &&
+                    !m.name.includes('aqa') &&
+                    !m.name.includes('imagen')
+                );
 
-                if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    const replyText = data.candidates[0].content.parts[0].text;
-                    return {
-                        choices: [
-                            {
-                                message: {
-                                    role: 'assistant',
-                                    content: replyText
-                                }
-                            }
-                        ]
-                    };
+                if (chatModels.length > 0) {
+                    // Priority preference list of current models
+                    const preferred = [
+                        'models/gemini-2.0-flash',
+                        'models/gemini-2.0-flash-exp',
+                        'models/gemini-2.5-flash',
+                        'models/gemini-1.5-flash-latest',
+                        'models/gemini-1.5-flash-002',
+                        'models/gemini-1.5-flash-001',
+                        'models/gemini-1.5-flash',
+                        'models/gemini-1.5-pro-latest',
+                        'models/gemini-1.5-pro-002',
+                        'models/gemini-1.5-pro',
+                        'models/gemini-pro'
+                    ];
+
+                    const found = preferred.find(p => chatModels.some(m => m.name === p));
+                    targetModelPath = found || chatModels[0].name;
+                } else {
+                    const names = listData.models.map(m => m.name).join(', ');
+                    throw new Error(`No models with generateContent found for this key. Available models: [${names}]`);
                 }
-
-                if (data?.error?.message) {
-                    lastError = data.error.message;
-                    // If model is not found, try the next candidate model
-                    if (response.status === 404 || data.error.message.includes('not found')) {
-                        continue;
-                    } else {
-                        // Other errors like quota or invalid key should fail fast
-                        throw new Error(data.error.message);
-                    }
-                }
-            } catch (err) {
-                lastError = err.message;
-                if (!err.message.includes('not found')) {
-                    throw err;
-                }
+            }
+        } catch (err) {
+            console.warn('ListModels query failed or completed with note:', err.message);
+            if (err.message.startsWith('Google AI Studio error') || err.message.startsWith('No models')) {
+                throw err;
             }
         }
     }
 
-    throw new Error(lastError || 'No supported Gemini model found for this API key.');
+    if (!targetModelPath) {
+        targetModelPath = 'models/gemini-2.0-flash';
+    }
+
+    // Step 2: Call the selected model
+    const url = `https://generativelanguage.googleapis.com/v1beta/${targetModelPath}:generateContent?key=${apiKey}`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data?.error?.message || `Gemini Error (${response.status}) on ${targetModelPath}`);
+    }
+
+    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!replyText) {
+        throw new Error('Empty response received from Gemini');
+    }
+
+    return {
+        choices: [
+            {
+                message: {
+                    role: 'assistant',
+                    content: replyText
+                }
+            }
+        ]
+    };
 }
 
 /**
