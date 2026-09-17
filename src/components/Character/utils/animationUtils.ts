@@ -7,7 +7,7 @@ const setAnimations = (gltf: GLTF) => {
   let mixer = new THREE.AnimationMixer(character);
   if (gltf.animations) {
     const introClip = gltf.animations.find(
-      (clip) => clip.name === "introAnimation"
+      (clip: THREE.AnimationClip) => clip.name === "introAnimation"
     );
     const introAction = mixer.clipAction(introClip!);
     introAction.setLoop(THREE.LoopOnce, 1);
@@ -34,13 +34,13 @@ const setAnimations = (gltf: GLTF) => {
   }
   function startIntro() {
     const introClip = gltf.animations.find(
-      (clip) => clip.name === "introAnimation"
+      (clip: THREE.AnimationClip) => clip.name === "introAnimation"
     );
     const introAction = mixer.clipAction(introClip!);
     introAction.clampWhenFinished = true;
     introAction.reset().play();
     setTimeout(() => {
-      const blink = gltf.animations.find((clip) => clip.name === "Blink");
+      const blink = gltf.animations.find((clip: THREE.AnimationClip) => clip.name === "Blink");
       mixer.clipAction(blink!).play().fadeIn(0.5);
     }, 2500);
   }

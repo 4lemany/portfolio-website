@@ -68,13 +68,19 @@ const Contact = () => {
                 {config.contact.email}
               </a>
             </p>
+            <h4>Phone</h4>
+            <p>
+              <a href={`tel:${config.social.phone?.replace(/\s+/g, '')}`} data-cursor="disable">
+                {config.social.phone}
+              </a>
+            </p>
             <h4>Location</h4>
             <p>
               <span>{config.social.location}</span>
             </p>
           </div>
           <div className="contact-box">
-            <h4>Social</h4>
+            <h4>Social & Profile</h4>
             <a
               href={config.contact.github}
               target="_blank"
@@ -94,31 +100,13 @@ const Contact = () => {
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href={config.contact.twitter}
+              href="/Adrian_Alemany_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
-              Twitter <MdArrowOutward />
-            </a>
-            <a
-              href={config.contact.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Facebook <MdArrowOutward />
-            </a>
-            <a
-              href={config.contact.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
+              Download CV <MdArrowOutward />
             </a>
           </div>
           <div className="contact-box">

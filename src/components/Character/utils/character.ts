@@ -25,7 +25,7 @@ const setCharacter = (
         let character: THREE.Object3D;
         loader.load(
           blobUrl,
-          async (gltf) => {
+          async (gltf: any) => {
             character = gltf.scene;
             await renderer.compileAsync(character, camera, scene);
             character.traverse((child: any) => {
@@ -47,7 +47,7 @@ const setCharacter = (
             dracoLoader.dispose();
           },
           undefined,
-          (error) => {
+          (error: any) => {
             console.error("Error loading GLTF model:", error);
             reject(error);
           }

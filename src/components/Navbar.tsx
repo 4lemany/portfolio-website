@@ -4,33 +4,37 @@ import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import Lenis from "lenis";
 import "./styles/Navbar.css";
+import { config } from "../config";
 
 gsap.registerPlugin(ScrollTrigger);
 export let lenis: Lenis | null = null;
 
 const Navbar = () => {
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    // Initialize Lenis smooth scroll with responsive settings
     lenis = new Lenis({
-      duration: 1.7,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.7,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
       infinite: false,
     });
+
+    lenis.on("scroll", ScrollTrigger.update);
 
     // Start paused
     lenis.stop();
 
-    // Handle smooth scroll animation frame
+    // Handle smooth scroll animation frame with proper cleanup
+    let rafId: number;
     function raf(time: number) {
       lenis?.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // Handle navigation links
     let links = document.querySelectorAll(".header ul a");
@@ -46,7 +50,7 @@ const Navbar = () => {
             if (target) {
               lenis.scrollTo(target, {
                 offset: 0,
-                duration: 1.5,
+                duration: 1.2,
               });
             }
           }
@@ -55,11 +59,14 @@ const Navbar = () => {
     });
 
     // Handle resize
-    window.addEventListener("resize", () => {
+    const onResize = () => {
       lenis?.resize();
-    });
+    };
+    window.addEventListener("resize", onResize);
 
     return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
       lenis?.destroy();
     };
   }, []);
@@ -67,14 +74,14 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          RH
+          AA
         </a>
         <a
-          href="mailto:redoyanul1234@gmail.com"
+          href={`mailto:${config.contact.email}`}
           className="navbar-connect"
           data-cursor="disable"
         >
-          redoyanul1234@gmail.com
+          {config.contact.email}
         </a>
         <ul>
           <li>

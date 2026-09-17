@@ -25,7 +25,12 @@ const Scene = () => {
       let rect = canvasDiv.current.getBoundingClientRect();
       let container = { width: rect.width, height: rect.height };
       const aspect = container.width / container.height;
+      // Ensure any existing canvases from HMR or previous mounts are removed
+      const existingCanvases = canvasDiv.current.querySelectorAll("canvas");
+      existingCanvases.forEach((c) => c.remove());
+
       const scene = sceneRef.current;
+      scene.clear();
 
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
@@ -33,7 +38,7 @@ const Scene = () => {
         powerPreference: "high-performance",
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       canvasDiv.current.appendChild(renderer.domElement);
@@ -54,26 +59,36 @@ const Scene = () => {
       let progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
+      let isMounted = true;
+
       loadCharacter().then((gltf) => {
-        if (gltf) {
-          const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
-          mixer = animations.mixer;
-          let character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          progress.loaded().then(() => {
-            setTimeout(() => {
-              light.turnOnLights();
-              animations.startIntro();
-            }, 2500);
-          });
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character)
-          );
+        if (!isMounted || !gltf) return;
+
+        // Ensure no previous characters remain in the scene
+        for (let i = scene.children.length - 1; i >= 0; i--) {
+          const child = scene.children[i];
+          if (child.type === "Group") {
+            scene.remove(child);
+          }
         }
+
+        const animations = setAnimations(gltf);
+        hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+        mixer = animations.mixer;
+        let character = gltf.scene;
+        setChar(character);
+        scene.add(character);
+        headBone = character.getObjectByName("spine006") || null;
+        screenLight = character.getObjectByName("screenlight") || null;
+        progress.loaded().then(() => {
+          setTimeout(() => {
+            light.turnOnLights();
+            animations.startIntro();
+          }, 2500);
+        });
+        window.addEventListener("resize", () =>
+          handleResize(renderer, camera, canvasDiv, character)
+        );
       });
 
       let mouse = { x: 0, y: 0 },
@@ -99,16 +114,22 @@ const Scene = () => {
         });
       };
 
-      document.addEventListener("mousemove", (event) => {
-        onMouseMove(event);
-      });
+      document.addEventListener("mousemove", onMouseMove);
       const landingDiv = document.getElementById("landingDiv");
       if (landingDiv) {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
+
+      let animationFrameId: number;
       const animate = () => {
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
+
+        const delta = clock.getDelta();
+        if (mixer) {
+          mixer.update(delta);
+        }
+
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -120,25 +141,30 @@ const Scene = () => {
           );
           light.setPointLight(screenLight);
         }
-        const delta = clock.getDelta();
-        if (mixer) {
-          mixer.update(delta);
+
+        // Only pause WebGL rendering once the character has completely exited off-screen (past What I Do)
+        const careerSection = document.querySelector(".career-section");
+        const isPastCharacter = careerSection && careerSection.getBoundingClientRect().top < 0;
+        if (!isPastCharacter) {
+          renderer.render(scene, camera);
         }
-        renderer.render(scene, camera);
       };
       animate();
+
       return () => {
+        isMounted = false;
+        cancelAnimationFrame(animationFrameId);
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
         window.removeEventListener("resize", () =>
           handleResize(renderer, camera, canvasDiv, character!)
         );
-        if (canvasDiv.current) {
+        if (canvasDiv.current && renderer.domElement.parentElement === canvasDiv.current) {
           canvasDiv.current.removeChild(renderer.domElement);
         }
+        document.removeEventListener("mousemove", onMouseMove);
         if (landingDiv) {
-          document.removeEventListener("mousemove", onMouseMove);
           landingDiv.removeEventListener("touchstart", onTouchStart);
           landingDiv.removeEventListener("touchend", onTouchEnd);
         }

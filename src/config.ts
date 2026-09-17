@@ -1,190 +1,151 @@
 export const config = {
     developer: {
-        name: "Redoyanul",
-        fullName: "Redoyanul Haque",
-        title: "AI & Full-Stack Developer",
-        description: "AI & Full-Stack Developer building intelligent systems and modern web applications. Passionate about machine learning, deep learning, and creating next-gen autonomous agents."
+        name: "Adrián",
+        fullName: "Adrián Alemany",
+        title: "Programmer | IA & Data Engineer | Google Cloud Solutions",
+        description: "Data Scientist & AI Engineer with technical training in Google Cloud, Data Engineering, and Generative Artificial Intelligence. Hands-on experience in developing End-to-End architectures: from data ingestion and pipelines (dbt, Terraform, GCP) to the deployment of predictive models and RAG agents."
     },
     social: {
-        github: "red1-for-hek",
-        email: "redoyanul1234@gmail.com",
-        location: "Bangladesh"
+        github: "4lemany",
+        email: "adrianalemany40@gmail.com",
+        phone: "+34 644 87 11 25",
+        location: "Valencia, Spain"
     },
     about: {
         title: "About Me",
-        description: "I am a self-taught AI & Full-Stack Developer from Bangladesh. I build intelligent systems, chatbots, and modern web applications. My expertise includes Machine Learning, Deep Learning, NLP, and Full-Stack Web Development with React, Node.js, and Python. Currently building next-gen AI Agents and JARVIS-like Personal Assistants. I have a competitive programming mindset and a deep passion for automation. Code is poetry, AI is the canvas."
+        description: "Data Scientist & AI Engineer with technical training in Google Cloud, Data Engineering, and Generative Artificial Intelligence. Hands-on experience in developing End-to-End architectures: from data ingestion and pipelines (dbt, Terraform, GCP) to the deployment of predictive models and RAG agents. Passionate about technical innovation and continuous upskilling within the Open Source ecosystem."
     },
     experiences: [
         {
-            position: "Learning Something New",
-            company: "Self-Development",
+            position: "Master de IA, DATA & Google Cloud",
+            company: "EDEM Escuela de Empresarios",
             period: "2025 - Present",
-            location: "Bangladesh",
-            description: "Continuously exploring emerging technologies, researching advanced AI systems, and pushing the boundaries of what's possible in tech.",
+            location: "Valencia, Spain",
+            description: "Advanced specialization in Artificial Intelligence, Cloud Data Engineering, Big Data processing (GCP, BigQuery, Dataflow), and autonomous agent systems.",
             responsibilities: [
-                "Researching cutting-edge AI and ML technologies",
-                "Experimenting with new frameworks and tools",
-                "Contributing to open-source projects",
-                "Building innovative personal projects"
+                "Architecting scalable streaming and batch pipelines on Google Cloud Platform",
+                "Training, evaluating and deploying Machine Learning & Deep Learning models",
+                "Building RAG systems and autonomous multi-agent workflows with LangChain & LangGraph",
+                "Implementing Infrastructure as Code (Terraform) and MLOps practices"
             ],
-            technologies: ["Research", "Innovation", "Open Source", "New Tech"]
+            technologies: ["GCP", "Vertex AI", "BigQuery", "Dataflow", "Python", "dbt", "Terraform", "Docker"]
         },
         {
-            position: "AI Engineer",
-            company: "Freelance & Projects",
+            position: "Professional Machine Learning Engineer Cloud",
+            company: "Google Cloud Certified",
             period: "2025",
-            location: "Bangladesh",
-            description: "Developing intelligent AI systems, chatbots, and machine learning solutions. Building next-gen conversational AI agents and JARVIS-like personal assistants.",
+            location: "Valencia, Spain",
+            description: "Official Google Cloud certification validating expertise in designing, building, and productionizing ML models and data pipelines using Google Cloud technologies.",
             responsibilities: [
-                "Building AI-powered chatbots and conversational agents",
-                "Developing machine learning models with TensorFlow and PyTorch",
-                "Working with LLMs and transformer architectures",
-                "Creating autonomous AI systems and automation tools"
+                "Architecting end-to-end ML solutions on Vertex AI and BigQuery ML",
+                "Designing scalable data ingestion pipelines with Pub/Sub and Dataflow",
+                "Implementing model governance, tracking, and continuous monitoring"
             ],
-            technologies: ["Python", "TensorFlow", "PyTorch", "LLMs", "NLP", "AI Agents"]
+            technologies: ["Google Cloud Platform", "Vertex AI", "BigQuery", "Pub/Sub", "MLOps"]
         },
         {
-            position: "Full-Stack Developer",
-            company: "Freelance & Projects",
+            position: "AI-300: ML Operations Engineer Associate",
+            company: "Microsoft Azure Certified",
             period: "2024",
-            location: "Bangladesh",
-            description: "Built complete web applications from frontend to backend. Developed responsive UIs, RESTful APIs, and database solutions for various clients and projects.",
+            location: "Valencia, Spain",
+            description: "Certification covering operationalization of machine learning workflows, model management, CI/CD integration, and cloud-native MLOps architecture.",
             responsibilities: [
-                "Developing full-stack web applications using React and Node.js",
-                "Building RESTful APIs and integrating databases",
-                "Creating responsive and interactive user interfaces",
-                "Deploying and maintaining web applications"
+                "Implementing automated ML pipelines and containerized inference",
+                "Monitoring model drift, data lineage, and operational metrics",
+                "Managing cloud resources and deployment security"
             ],
-            technologies: ["React", "Node.js", "MongoDB", "Express", "Next.js", "TypeScript"]
+            technologies: ["Azure ML", "MLOps", "Docker", "CI/CD", "Python"]
         },
         {
-            position: "Python Developer",
-            company: "Self-Taught & Projects",
-            period: "2023",
-            location: "Bangladesh",
-            description: "Dove deep into Python programming, building automation scripts, bots, and mastering the fundamentals of software development and problem-solving.",
+            position: "Bootcamp de creación de páginas web",
+            company: "EDEM Escuela de Empresarios",
+            period: "2024",
+            location: "Valencia, Spain",
+            description: "Intensive training in modern web engineering, full-stack application development, and responsive user experience design.",
             responsibilities: [
-                "Learning Python programming and core concepts",
-                "Building automation scripts and Discord bots",
-                "Exploring data structures and algorithms",
-                "Participating in competitive programming"
+                "Developing interactive and typed user interfaces with React and TypeScript",
+                "Building backend microservices and RESTful APIs",
+                "Integrating modern frontend design patterns and client-side routing"
             ],
-            technologies: ["Python", "Automation", "Scripting", "Discord.py", "Problem Solving"]
-        },
-        {
-            position: "Graphic Designer",
-            company: "Freelance",
-            period: "2022",
-            location: "Bangladesh",
-            description: "Started my creative journey as a graphic designer, creating logos, banners, and visual content. This sparked my passion for technology and digital creation.",
-            responsibilities: [
-                "Designing logos and brand identity materials",
-                "Creating social media graphics and banners",
-                "Working with clients on creative projects",
-                "Learning design principles and visual aesthetics"
-            ],
-            technologies: ["Photoshop", "Illustrator", "Canva", "Figma", "Visual Design"]
-        },
-        {
-            position: "Microsoft Office",
-            company: "Begin Learning",
-            period: "2021",
-            location: "Bangladesh",
-            description: "Started my journey into the digital world by learning Microsoft Office tools. This foundational step introduced me to computers and sparked my curiosity for technology.",
-            responsibilities: [
-                "Learning Microsoft Word, Excel, and PowerPoint",
-                "Creating documents and presentations",
-                "Understanding basic computer operations",
-                "Building foundational digital skills"
-            ],
-            technologies: ["MS Word", "MS Excel", "MS PowerPoint", "Computer Basics"]
+            technologies: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Git"]
         }
     ],
     projects: [
         {
             id: 1,
-            title: "Drishti",
-            category: "AI / LLM",
-            technologies: "Python, PyTorch, Transformers, FastAPI, React, MongoDB",
-            image: "/images/Drishti.png",
-            description: "Bangladesh's first intelligent advanced AI chatbot powered by a custom Large Language Model. Features natural language understanding, contextual conversations, and multilingual support including Bengali.",
-            link: "https://huggingface.co/red1-for-hek/drishti-ilm-x1"
+            title: "Maritime Fuel Consumption Predictive System",
+            category: "Data Engineering & ML (Baleària Case Study)",
+            technologies: "Python, GCP (Pub/Sub, Dataflow, BigQuery, Vertex AI), DBT, Terraform, CI/CD (GitHub Actions)",
+            image: "/images/FloodSpaces.png",
+            description: "Designed an end-to-end streaming and batch data pipeline utilizing Pub/Sub, Dataflow, and analytical transformations with DBT and BigQuery. Trained and deployed Machine Learning models on Vertex AI Endpoints to predict optimal fuel consumption per maritime route. Implemented IaC via Terraform, CI/CD pipelines in GitHub Actions, and an interactive telemetry dashboard.",
+            link: "https://github.com/4lemany"
         },
         {
             id: 2,
-            title: "VoteChain",
-            category: "Blockchain",
-            technologies: "Solidity, Web3.js, React, Ethereum, IPFS, MetaMask, Node.js",
-            image: "/images/VoteChain.png",
-            description: "A decentralized election system built on blockchain technology ensuring transparent, tamper-proof, and verifiable voting. Features smart contracts for vote integrity and real-time result tracking.",
-            link: "https://github.com/red1-for-hek/smart-election-by-blockchain"
+            title: "Intelligent Job Platform with Autonomous Agents",
+            category: "Autonomous Multi-Agent & Full-Stack",
+            technologies: "Python, Google ADK, MCP, React, TypeScript, Gemini API, Speech-to-Text, FastAPI, App Engine",
+            image: "/images/Drishti.png",
+            description: "Built a multi-agent backend architecture (sequential and parallel) with LangChain for automated profile and job offer analysis, filtering, and matching. Integrated Model Context Protocols (MCPs) into the orchestrator agent to utilize Speech-to-Text and Gemini API for real-time interactive voice interviews with an LLM. Developed a reactive React + TypeScript frontend.",
+            link: "https://github.com/4lemany"
+        },
+        {
+            id: 3,
+            title: "CivicPulse AI — Autonomous Governance Platform",
+            category: "Multi-Agent AI & Distributed Systems",
+            technologies: "Python, FastAPI, LangGraph, PostgreSQL, Docker, GCP (Cloud Run), ChromaDB, Streamlit",
+            image: "/images/RedxChess.png",
+            description: "Designed and implemented an autonomous, distributed multi-agent system capable of simulating decision-making based on real-time data streams and algorithmic governance. Orchestrated asynchronous communication and consensus resolution among specialized agents using LangGraph and ChromaDB (RAG for regulations). Deployed containerized architecture with Docker on GCP Cloud Run.",
+            link: "https://github.com/4lemany"
         },
         {
             id: 4,
-            title: "Flood Spaces 2.0",
-            category: "AI / ML",
-            technologies: "Python, TensorFlow, Pandas, React, FastAPI, GIS",
-            image: "/images/FloodSpaces.png",
-            description: "Predicts flood risks across Bangladesh up to one month in advance and sends early alerts to help people prepare.",
-            link: "https://github.com/red1-for-hek/Flood-Spaces-2.0"
+            title: "Tourist Occupancy Predictive Engine",
+            category: "Machine Learning & Cloud Pipelines",
+            technologies: "Python, XGBoost, Vertex AI, REST API, DBT, Terraform",
+            image: "/images/Prodesk.png",
+            description: "Developed a predictive model using XGBoost to estimate occupancy rates, ingesting and cross-referencing weather and real estate market data via external APIs. Orchestrated modular data preprocessing with DBT and provisioned infrastructure on Google Cloud with Terraform. Deployed model for online inference on a managed Vertex AI endpoint.",
+            link: "https://github.com/4lemany"
         },
         {
             id: 5,
-            title: "Phoenix 3.0",
-            category: "AI Assistant",
-            technologies: "Python, Speech Recognition, PyAutoGUI, OpenAI API, Tkinter",
+            title: "Intelligent Price Comparator with RAG & OCR",
+            category: "RAG, Document AI & Web Scraping (Hackathon)",
+            technologies: "Python, Crawl4AI, Scrapy, Document AI (OCR), LangChain, Vector DB, FastAPI, Streamlit",
             image: "/images/Phoenix3.0.png",
-            description: "A JARVIS-inspired personal AI desktop assistant. Controls system functions, manages tasks, answers queries, automates workflows, and provides voice-activated computing experience.",
-            link: "https://github.com/red1-for-hek/phoenix3.0"
+            description: "Built an automated extraction and resilient scraping pipeline using Crawl4AI and Scrapy, processing catalogs and brochures via Google Document AI (OCR). Implemented a natural language querying system with Retrieval-Augmented Generation (RAG) to compare prices and suggest optimal purchasing options. Created an MVP in record time.",
+            link: "https://github.com/4lemany"
         },
         {
             id: 6,
-            title: "RedxChess",
-            category: "AI / Game Engine",
-            technologies: "Python, C++, Neural Networks, Bitboards, UCI Protocol",
-            image: "/images/RedxChess.png",
-            description: "A high-performance chess engine rated 3640 ELO. Features advanced search algorithms, neural network evaluation, and optimized bitboard representation for lightning-fast move generation.",
-            link: "/play"
-        },
-        {
-            id: 7,
-            title: "Prodesk",
-            category: "E-commerce",
-            technologies: "React, Node.js, MongoDB, Express, Stripe",
-            image: "/images/Prodesk.png",
-            description: "A complete e-commerce platform with secure checkout and smooth product browsing.",
-            link: "https://github.com/red1-for-hek/prodesk"
-        },
-        {
-            id: 8,
-            title: "HekTools",
-            category: "Security / Android",
-            technologies: "Kotlin, Android SDK, Firebase, Python, Encryption",
-            image: "/images/hektools.png",
-            description: "An advanced Android monitoring and security research tool. Features remote device management, activity logging, and encrypted data transmission for security testing purposes.",
-            link: ""
+            title: "Kaggle Predictive Machine Learning Challenge",
+            category: "Competitive Data Science & Deep Learning",
+            technologies: "Python, Scikit-Learn, PyTorch, TensorFlow, PCA, MICE, Cross-Validation",
+            image: "/images/VoteChain.png",
+            description: "Performed exploratory data analysis (EDA), advanced feature engineering (encoding, normalization, PCA, MICE), and comparative experimentation between traditional models (Scikit-Learn) and Deep Learning architectures (PyTorch / TensorFlow). Optimized hyperparameters achieving up to 96% accuracy with rigorous cross-validation (ROC AUC, PR AUC).",
+            link: "https://github.com/4lemany"
         }
     ],
     contact: {
-        email: "redoyanul1234@gmail.com",
-        github: "https://github.com/red1-for-hek",
-        linkedin: "https://linkedin.com/in/red1-for-hek",
-        twitter: "https://x.com/red_1_ul",
-        facebook: "https://www.facebook.com/redoyanulhaque.hacker.official",
-        instagram: "https://www.instagram.com/red_1_ul"
+        email: "adrianalemany40@gmail.com",
+        github: "https://github.com/4lemany",
+        linkedin: "https://www.linkedin.com/in/adri%C3%A1n-alemany-97202a227/",
+        twitter: "https://github.com/4lemany",
+        facebook: "https://github.com/4lemany",
+        instagram: "https://github.com/4lemany"
     },
     skills: {
         develop: {
-            title: "AI DEVELOPER",
-            description: "Building intelligent systems & AI solutions",
-            details: "Developing AI agents, chatbots, and machine learning models using Python, TensorFlow, and PyTorch. Specializing in LLMs, NLP, deep learning, and autonomous systems.",
-            tools: ["Python", "TensorFlow", "PyTorch", "OpenCV", "Scikit-learn", "LLMs", "NLP", "Deep Learning", "Chatbots", "AI Agents"]
+            title: "IA & DATA ENGINEER",
+            description: "End-to-End architectures, ML models & Agentic AI",
+            details: "Developing robust data pipelines (dbt, Dataflow, BigQuery) and predictive Machine Learning models on Google Cloud Vertex AI. Designing autonomous multi-agent systems and RAG pipelines using LangChain, LangGraph, and modern LLM APIs.",
+            tools: ["Python", "SQL", "Google Cloud (Vertex AI, BigQuery, Dataflow, Pub/Sub)", "LangChain", "LangGraph", "RAG", "LLMs", "Scikit-Learn", "XGBoost", "PyTorch", "TensorFlow", "MLOps (MLflow, Grafana)", "dbt", "Terraform", "Docker", "Apache Beam", "Kafka"]
         },
         design: {
-            title: "FULL-STACK",
-            description: "Modern web development & scalable applications",
-            details: "Building responsive and performant web applications using React, Next.js, Node.js, and databases. Creating seamless user experiences with modern UI/UX principles.",
-            tools: ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "PostgreSQL", "TailwindCSS", "REST APIs", "Docker", "Git"]
+            title: "SOFTWARE & CLOUD SOLUTIONS",
+            description: "Modern web interfaces, APIs & cloud deployments",
+            details: "Building reactive and typed interfaces in React and TypeScript connected to low-latency backend microservices with FastAPI and Docker. Provisioning cloud infrastructure with Terraform and continuous deployment via GitHub Actions.",
+            tools: ["React", "TypeScript", "JavaScript", "FastAPI", "PostgreSQL", "Docker", "GCP Cloud Run", "Terraform", "CI/CD (GitHub Actions)", "Web Scraping (Crawl4AI, Scrapy)", "UV", "REST APIs", "Git"]
         }
     }
 };

@@ -12,49 +12,82 @@ import { config } from "../config";
 
 const SocialIcons = () => {
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const social = document.getElementById("social");
+    if (!social) return;
+
+    const cleanupFns: (() => void)[] = [];
 
     social.querySelectorAll("span").forEach((item) => {
       const elem = item as HTMLElement;
       const link = elem.querySelector("a") as HTMLElement;
+      if (!link) return;
 
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
+      let rAFId: number | null = null;
+      let targetX = 0;
+      let targetY = 0;
       let currentX = 0;
       let currentY = 0;
+      let isHovered = false;
 
       const updatePosition = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
+        currentX += (targetX - currentX) * 0.2;
+        currentY += (targetY - currentY) * 0.2;
 
         link.style.setProperty("--siLeft", `${currentX}px`);
         link.style.setProperty("--siTop", `${currentY}px`);
 
-        requestAnimationFrame(updatePosition);
+        if (!isHovered && Math.abs(targetX - currentX) < 0.2 && Math.abs(targetY - currentY) < 0.2) {
+          link.style.setProperty("--siLeft", "0px");
+          link.style.setProperty("--siTop", "0px");
+          rAFId = null;
+          return;
+        }
+
+        rAFId = requestAnimationFrame(updatePosition);
       };
 
-      const onMouseMove = (e: MouseEvent) => {
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (x < 40 && x > 10 && y < 40 && y > 5) {
-          mouseX = x;
-          mouseY = y;
-        } else {
-          mouseX = rect.width / 2;
-          mouseY = rect.height / 2;
+      const startAnimation = () => {
+        if (!rAFId) {
+          rAFId = requestAnimationFrame(updatePosition);
         }
       };
 
-      document.addEventListener("mousemove", onMouseMove);
-
-      updatePosition();
-
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
+      const onMouseMove = (e: MouseEvent) => {
+        const rect = elem.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        targetX = (e.clientX - centerX) * 0.4;
+        targetY = (e.clientY - centerY) * 0.4;
+        startAnimation();
       };
+
+      const onMouseEnter = () => {
+        isHovered = true;
+        startAnimation();
+      };
+
+      const onMouseLeave = () => {
+        isHovered = false;
+        targetX = 0;
+        targetY = 0;
+        startAnimation();
+      };
+
+      elem.addEventListener("mouseenter", onMouseEnter);
+      elem.addEventListener("mousemove", onMouseMove);
+      elem.addEventListener("mouseleave", onMouseLeave);
+
+      cleanupFns.push(() => {
+        if (rAFId) cancelAnimationFrame(rAFId);
+        elem.removeEventListener("mouseenter", onMouseEnter);
+        elem.removeEventListener("mousemove", onMouseMove);
+        elem.removeEventListener("mouseleave", onMouseLeave);
+      });
     });
+
+    return () => {
+      cleanupFns.forEach((fn) => fn());
+    };
   }, []);
 
   return (
@@ -81,7 +114,7 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#">
+      <a className="resume-button" href="/Adrian_Alemany_CV.pdf" target="_blank" rel="noopener noreferrer">
         <HoverLinks text="RESUME" />
         <span>
           <TbNotes />

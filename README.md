@@ -82,7 +82,7 @@ If you found this useful:
 
 ## 🤝 Connect
 
-- LinkedIn: https://www.linkedin.com/in/red1-for-hek/
+- LinkedIn: https://www.linkedin.com/in/adri%C3%A1n-alemany-97202a227/
 
 ---
 

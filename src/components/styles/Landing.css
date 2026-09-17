@@ -176,6 +176,9 @@
   filter: blur(60px);
   border-radius: 50%;
   animation: loadingCircle 5s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: none;
 }
 
 .nav-fade {
@@ -216,6 +219,9 @@
   filter: blur(50px);
   border-radius: 50%;
   animation: loadingCircle2 5s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: none;
 }
 
 @keyframes loadingCircle2 {
