@@ -129,19 +129,18 @@ async function callGemini(apiKey, messages) {
                 );
 
                 if (chatModels.length > 0) {
-                    // Priority preference list of current models
+                    // Priority preference list of current models (Gemini 3.6 Flash primary)
                     const preferred = [
+                        'models/gemini-3.6-flash',
+                        'models/gemini-3.6',
+                        'models/gemini-3.5-flash',
+                        'models/gemini-3.5-pro',
                         'models/gemini-2.0-flash',
                         'models/gemini-2.0-flash-exp',
                         'models/gemini-2.5-flash',
                         'models/gemini-1.5-flash-latest',
                         'models/gemini-1.5-flash-002',
-                        'models/gemini-1.5-flash-001',
-                        'models/gemini-1.5-flash',
-                        'models/gemini-1.5-pro-latest',
-                        'models/gemini-1.5-pro-002',
-                        'models/gemini-1.5-pro',
-                        'models/gemini-pro'
+                        'models/gemini-1.5-flash'
                     ];
 
                     const found = preferred.find(p => chatModels.some(m => m.name === p));
@@ -160,7 +159,7 @@ async function callGemini(apiKey, messages) {
     }
 
     if (!targetModelPath) {
-        targetModelPath = 'models/gemini-2.0-flash';
+        targetModelPath = 'models/gemini-3.6-flash';
     }
 
     // Step 2: Call the selected model
