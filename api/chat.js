@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
     if (!apiKey) {
         return res.status(500).json({ 
-            error: 'Server configuration error: Missing API Key in Vercel Environment Variables. Configure GEMINI_API_KEY (or GOOGLE_API_KEY) in your Vercel project settings.' 
+            error: 'Server configuration error: Missing API Key in Vercel Environment Variables. Configure GEMINI_API_KEY in your Vercel project settings.' 
         });
     }
 
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        // 1. Google Gemini (AI Studio) - keys starting with AIza or if set as Gemini/Google env var
+        // 1. Google Gemini (AI Studio)
         const isGemini = apiKey.startsWith('AIza') || 
             Boolean(process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY) ||
             (!apiKey.startsWith('gsk_') && !apiKey.startsWith('sk-'));
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
 }
 
 /**
- * Native Google AI Studio (Gemini) integration
+ * Native Google AI Studio (Gemini) integration with automatic model fallback
  */
 async function callGemini(apiKey, messages) {
     let systemInstruction = '';
@@ -107,37 +107,66 @@ async function callGemini(apiKey, messages) {
         };
     }
 
-    // Use Gemini 1.5 Flash (fast, generous free tier on AI Studio)
-    const model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    // Models ordered by priority: Gemini 2.0 Flash is the modern standard on AI Studio
+    const candidateModels = [
+        process.env.GEMINI_MODEL,
+        'gemini-2.0-flash',
+        'gemini-2.0-flash-exp',
+        'gemini-2.5-flash',
+        'gemini-1.5-flash-latest',
+        'gemini-1.5-flash-002',
+        'gemini-1.5-flash',
+        'gemini-1.5-pro'
+    ].filter(Boolean);
 
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
+    let lastError = null;
 
-    const data = await response.json();
+    for (const model of candidateModels) {
+        for (const apiVersion of ['v1beta', 'v1']) {
+            try {
+                const url = `https://generativelanguage.googleapis.com/${apiVersion}/models/${model}:generateContent?key=${apiKey}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-    if (!response.ok) {
-        throw new Error(data?.error?.message || `Google Gemini API Error (${response.status})`);
-    }
+                const data = await response.json();
 
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!replyText) {
-        throw new Error('Empty response received from Gemini');
-    }
+                if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const replyText = data.candidates[0].content.parts[0].text;
+                    return {
+                        choices: [
+                            {
+                                message: {
+                                    role: 'assistant',
+                                    content: replyText
+                                }
+                            }
+                        ]
+                    };
+                }
 
-    return {
-        choices: [
-            {
-                message: {
-                    role: 'assistant',
-                    content: replyText
+                if (data?.error?.message) {
+                    lastError = data.error.message;
+                    // If model is not found, try the next candidate model
+                    if (response.status === 404 || data.error.message.includes('not found')) {
+                        continue;
+                    } else {
+                        // Other errors like quota or invalid key should fail fast
+                        throw new Error(data.error.message);
+                    }
+                }
+            } catch (err) {
+                lastError = err.message;
+                if (!err.message.includes('not found')) {
+                    throw err;
                 }
             }
-        ]
-    };
+        }
+    }
+
+    throw new Error(lastError || 'No supported Gemini model found for this API key.');
 }
 
 /**
