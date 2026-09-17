@@ -261,6 +261,10 @@ const Play = () => {
 
       const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data?.error || `Error ${response.status}: Failed to get response from AI`);
+      }
+
       if (data.choices && data.choices[0]?.message?.content) {
         const assistantMessage: ChatMessage = {
           role: 'assistant',
@@ -268,13 +272,13 @@ const Play = () => {
         };
         setChatMessages(prev => [...prev, assistantMessage]);
       } else {
-        throw new Error('Invalid response');
+        throw new Error(data?.error || 'Invalid response format from AI');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Chat error:', error);
       const errorMessage: ChatMessage = {
         role: 'assistant',
-        content: 'Sorry, having some connection issues. Try again? 😅'
+        content: error?.message || 'Sorry, having some connection issues. Try again? 😅'
       };
       setChatMessages(prev => [...prev, errorMessage]);
     } finally {
