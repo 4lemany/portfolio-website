@@ -76,7 +76,7 @@ export const config = {
             title: "Maritime Fuel Consumption Predictive System",
             category: "Data Engineering & ML (Baleària Case Study)",
             technologies: "Python, GCP (Pub/Sub, Dataflow, BigQuery, Vertex AI), DBT, Terraform, CI/CD (GitHub Actions)",
-            image: "/images/FloodSpaces.png",
+            image: "/images/balearia_fuel.jpg",
             description: "Designed an end-to-end streaming and batch data pipeline utilizing Pub/Sub, Dataflow, and analytical transformations with DBT and BigQuery. Trained and deployed Machine Learning models on Vertex AI Endpoints to predict optimal fuel consumption per maritime route. Implemented IaC via Terraform, CI/CD pipelines in GitHub Actions, and an interactive telemetry dashboard.",
             link: "https://github.com/4lemany"
         },
@@ -85,7 +85,7 @@ export const config = {
             title: "Intelligent Job Platform with Autonomous Agents",
             category: "Autonomous Multi-Agent & Full-Stack",
             technologies: "Python, Google ADK, MCP, React, TypeScript, Gemini API, Speech-to-Text, FastAPI, App Engine",
-            image: "/images/Drishti.png",
+            image: "/images/job_platform_agents.jpg",
             description: "Built a multi-agent backend architecture (sequential and parallel) with LangChain for automated profile and job offer analysis, filtering, and matching. Integrated Model Context Protocols (MCPs) into the orchestrator agent to utilize Speech-to-Text and Gemini API for real-time interactive voice interviews with an LLM. Developed a reactive React + TypeScript frontend.",
             link: "https://github.com/4lemany"
         },
@@ -94,7 +94,7 @@ export const config = {
             title: "CivicPulse AI — Autonomous Governance Platform",
             category: "Multi-Agent AI & Distributed Systems",
             technologies: "Python, FastAPI, LangGraph, PostgreSQL, Docker, GCP (Cloud Run), ChromaDB, Streamlit",
-            image: "/images/RedxChess.png",
+            image: "/images/civicpulse_ai.jpg",
             description: "Designed and implemented an autonomous, distributed multi-agent system capable of simulating decision-making based on real-time data streams and algorithmic governance. Orchestrated asynchronous communication and consensus resolution among specialized agents using LangGraph and ChromaDB (RAG for regulations). Deployed containerized architecture with Docker on GCP Cloud Run.",
             link: "https://github.com/4lemany"
         },
@@ -103,7 +103,7 @@ export const config = {
             title: "Tourist Occupancy Predictive Engine",
             category: "Machine Learning & Cloud Pipelines",
             technologies: "Python, XGBoost, Vertex AI, REST API, DBT, Terraform",
-            image: "/images/Prodesk.png",
+            image: "/images/tourist_occupancy.jpg",
             description: "Developed a predictive model using XGBoost to estimate occupancy rates, ingesting and cross-referencing weather and real estate market data via external APIs. Orchestrated modular data preprocessing with DBT and provisioned infrastructure on Google Cloud with Terraform. Deployed model for online inference on a managed Vertex AI endpoint.",
             link: "https://github.com/4lemany"
         },
@@ -112,7 +112,7 @@ export const config = {
             title: "Intelligent Price Comparator with RAG & OCR",
             category: "RAG, Document AI & Web Scraping (Hackathon)",
             technologies: "Python, Crawl4AI, Scrapy, Document AI (OCR), LangChain, Vector DB, FastAPI, Streamlit",
-            image: "/images/Phoenix3.0.png",
+            image: "/images/price_comparator_rag.jpg",
             description: "Built an automated extraction and resilient scraping pipeline using Crawl4AI and Scrapy, processing catalogs and brochures via Google Document AI (OCR). Implemented a natural language querying system with Retrieval-Augmented Generation (RAG) to compare prices and suggest optimal purchasing options. Created an MVP in record time.",
             link: "https://github.com/4lemany"
         },
@@ -121,7 +121,7 @@ export const config = {
             title: "Kaggle Predictive Machine Learning Challenge",
             category: "Competitive Data Science & Deep Learning",
             technologies: "Python, Scikit-Learn, PyTorch, TensorFlow, PCA, MICE, Cross-Validation",
-            image: "/images/VoteChain.png",
+            image: "/images/kaggle_ml_experiment.jpg",
             description: "Performed exploratory data analysis (EDA), advanced feature engineering (encoding, normalization, PCA, MICE), and comparative experimentation between traditional models (Scikit-Learn) and Deep Learning architectures (PyTorch / TensorFlow). Optimized hyperparameters achieving up to 96% accuracy with rigorous cross-validation (ROC AUC, PR AUC).",
             link: "https://github.com/4lemany"
         }
