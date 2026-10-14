@@ -10,6 +10,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import TechStackNew from "./TechStackNew";
 import CallToAction from "./CallToAction";
+import DailyPapers from "./DailyPapers";
 import setSplitText from "./utils/splitText";
 
 const MainContainer = ({ children }: PropsWithChildren) => {
@@ -71,6 +72,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
         <WhatIDo />
         <Career />
         <Work />
+        <DailyPapers />
         <TechStackNew />
         <CallToAction />
         <Contact />
