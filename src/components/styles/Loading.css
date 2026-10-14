@@ -361,3 +361,12 @@
     font-size: 18px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .loading-marquee {
+    font-size: clamp(26px, 7vw, 38px);
+  }
+  .loading-marquee span {
+    padding: 0px 20px;
+  }
+}
