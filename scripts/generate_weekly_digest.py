@@ -115,11 +115,11 @@ Analiza estos {len(papers)} papers más votados de la semana en Hugging Face:
 
 {papers_text}
 
-Genera un objeto JSON ESTRICTO (sin explicaciones adicionales antes ni después) con la siguiente estructura exacta:
+Genera un objeto JSON ESTRICTO (sin texto adicional antes ni después) con la siguiente estructura exacta:
 {{
-  "weekTitle": "Título llamativo para el resumen de la semana (ej. 'Semana 42: La revolución de los agentes y la destilación de razonamiento')",
-  "dateRange": "Rango de fechas de los últimos 7 días",
-  "introduction": "Breve párrafo introductorio para la web sobre qué tendencias han dominado la comunidad esta semana.",
+  "weekTitle": "Título llamativo para el resumen semanal",
+  "dateRange": "Semana actual • Los más votados en Hugging Face",
+  "introduction": "Breve párrafo introductorio (2-3 frases) sobre las tendencias destacadas de la semana.",
   "podcast": [
     {{
       "speaker": "Álvaro",
@@ -141,12 +141,12 @@ Genera un objeto JSON ESTRICTO (sin explicaciones adicionales antes ni después)
         "Punto clave 2...",
         "Punto clave 3..."
       ],
-      "takeaway": "Frase de conclusión de por qué este paper es relevante."
+      "takeaway": "Frase concisa de conclusión sobre la relevancia del paper."
     }}
   ]
 }}
 
-El diálogo del podcast debe tener entre 10 y 16 turnos de conversación en total (5-8 por locutor), cubriendo los aspectos más sorprendentes de los papers.
+IMPORTANTE: Mantén el diálogo del podcast ágil y dinámico, entre 8 y 10 turnos en total (4-5 por locutor), con intervenciones concisas de 2-3 frases cada una para garantizar un ritmo fresco y evitar textos cortados.
 """
 
     payload = {
@@ -162,14 +162,14 @@ El diálogo del podcast debe tener entre 10 y 16 turnos de conversación en tota
         "generationConfig": {
             "responseMimeType": "application/json",
             "temperature": 0.7,
-            "maxOutputTokens": 4000
+            "maxOutputTokens": 8192
         }
     }
 
     req_data = json.dumps(payload).encode("utf-8")
 
     custom_model = os.environ.get("GEMINI_MODEL")
-    candidate_models = ["gemini-3.8-flash", "gemini-4-argon", "gemini-3.8-pro", "gemini-4"]
+    candidate_models = ["gemini-3.8-flash", "gemini-3.6-flash"]
     if custom_model:
         clean_model = custom_model.replace("models/", "").strip()
         models = [clean_model] + [m for m in candidate_models if m != clean_model]
