@@ -79,6 +79,7 @@ const Scene = () => {
         setChar(character);
         scene.add(character);
         headBone = character.getObjectByName("spine006") || null;
+        screenLight = character.getObjectByName("screenlight") || null;
         progress.loaded().then(() => {
           setTimeout(() => {
             light.turnOnLights();
