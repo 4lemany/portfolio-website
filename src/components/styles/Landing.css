@@ -1,23 +1,34 @@
-.mobile-photo {
-  display: none;
-}
+/* ==========================================================================
+   LANDING HERO SECTION STYLES (DESKTOP & MOBILE)
+   ========================================================================== */
 
 .landing-section {
   width: 100%;
   max-width: var(--cMaxWidth);
   margin: auto;
   position: relative;
-  height: var(--vh);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .landing-container {
   width: var(--cWidth);
   margin: auto;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
   max-width: var(--cMaxWidth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 60px 20px 40px 20px;
 }
 
+/* Ambient circles */
 .landing-circle1 {
   top: 0%;
   left: 0%;
@@ -33,30 +44,6 @@
   will-change: transform;
   backface-visibility: hidden;
   pointer-events: none;
-}
-
-.nav-fade {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 130px;
-  background-image: linear-gradient(0deg,
-      transparent,
-      var(--backgroundColor) 70%);
-  pointer-events: none;
-  z-index: 12;
-  opacity: 0;
-  left: 0;
-}
-
-@keyframes loadingCircle {
-  0% {
-    transform: translate(-95%, -75%) rotateZ(0deg);
-  }
-
-  100% {
-    transform: translate(-95%, -75%) rotateZ(360deg);
-  }
 }
 
 .landing-circle2 {
@@ -78,45 +65,39 @@
   pointer-events: none;
 }
 
+.nav-fade {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 130px;
+  background-image: linear-gradient(
+    0deg,
+    transparent,
+    var(--backgroundColor) 70%
+  );
+  pointer-events: none;
+  z-index: 12;
+  opacity: 0;
+  left: 0;
+}
+
+@keyframes loadingCircle {
+  0% {
+    transform: translate(-95%, -75%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-95%, -75%) rotateZ(360deg);
+  }
+}
+
 @keyframes loadingCircle2 {
   100% {
     transform: translate(calc(100% - 2px), -50%) rotate(360deg);
   }
 }
 
-.landing-video,
-.landing-image {
-  position: absolute;
-  bottom: 0;
-  height: 95%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.landing-image img {
-  height: 100%;
-  z-index: 2;
-  position: relative;
-}
-
-.character-rim {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  z-index: 1;
-  background-color: #f59bf8;
-  transform: translate(-50%, 36%) scaleX(1.4);
-  box-shadow: inset 66px 35px 85px 0px rgba(85, 0, 255, 0.65);
-  filter: blur(50px);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 100%) scale(1.4);
-  opacity: 0;
-}
-
+/* 3D Character Container */
 .character-model {
-  height: 80%;
   height: 80vh;
   position: absolute;
   max-width: 1920px;
@@ -124,7 +105,7 @@
   transform: translateX(-50%);
   width: 100%;
   left: 50%;
-  z-index: 0;
+  z-index: 3;
   bottom: 50px;
   pointer-events: inherit;
 }
@@ -133,9 +114,11 @@
   content: "";
   width: 100vw;
   height: 250px;
-  background-image: linear-gradient(to bottom,
-      transparent,
-      var(--backgroundColor) 70%);
+  background-image: linear-gradient(
+    to bottom,
+    transparent,
+    var(--backgroundColor) 70%
+  );
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
@@ -155,12 +138,6 @@
   position: absolute;
 }
 
-.character-loaded .character-rim {
-  animation: backlight 3s forwards;
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-
 .character-model canvas {
   position: relative;
   pointer-events: none;
@@ -178,164 +155,109 @@
   border-radius: 50%;
 }
 
+/* ==========================================================================
+   LANDING HERO CONTENT (NAME, PHOTO, 2-LINE TITLE)
+   ========================================================================== */
+
+/* 1. Intro Name at the Top */
 .landing-intro {
-  position: absolute;
-  z-index: 9;
-  top: 5%;
-  left: 0;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
 .landing-intro h2 {
   margin: 0;
-  color: var(--accentColor);
-  font-size: 22px;
+  color: var(--accentColor, #c2a4ff);
+  font-size: clamp(16px, 2.5vw, 22px);
   font-weight: 300;
   letter-spacing: 2px;
 }
 
 .landing-intro h1 {
-  margin: 0;
+  margin: 4px 0 0 0;
   letter-spacing: 2px;
-  font-size: 28px;
-  line-height: 28px;
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.15;
+  font-weight: 700;
+  font-family: "Geist", sans-serif;
+  color: #ffffff;
+}
+
+.landing-intro h1 span {
   font-weight: 500;
-  font-family: "Geist", sans-serif;
 }
 
-/* .landing-intro h1 span {
-   font-weight: 200; 
-} */
-
-.landing-info {
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  bottom: 40px;
-  top: inherit;
-  z-index: 9;
-}
-
-.landing-info h3 {
-  font-size: 22px;
-  letter-spacing: 2px;
-  font-weight: 300;
-  color: var(--accentColor);
-  margin: 0;
-}
-
-.landing-info h2 {
-  margin: 0;
-  margin-top: -20px;
-  margin-left: 20px;
-  font-family: "Geist", sans-serif;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 40px;
+/* 2. Central Hero Photo (Visible on desktop initially and on mobile) */
+.landing-hero-photo {
   position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
-
-.landing-h2-info {
-  white-space: nowrap;
-}
-
-.landing-h2-info-1 {
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
-}
-
-h2.landing-info-h2 {
-  color: #c481ff;
-  font-size: 36px;
-  width: 150%;
-  margin: 0;
-  font-family: "Geist", sans-serif;
-  font-weight: 600;
-  position: relative;
-  margin-left: -5px;
-}
-
-.landing-h2-2 {
-  position: absolute;
-  top: 0;
-  white-space: nowrap;
-}
-
-.landing-info-h2::after {
-  content: "";
-  position: absolute;
+  z-index: 2;
   width: 100%;
-  height: 120%;
-  z-index: 3;
-  background-image: linear-gradient(0deg,
-      var(--backgroundColor) 40%,
-      rgba(0, 0, 0, 0) 110%);
-  top: 0;
-  left: 0;
+  max-width: clamp(240px, 30vw, 360px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  pointer-events: none;
 }
 
+.landing-hero-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 45px rgba(194, 164, 255, 0.45));
+}
+
+/* 3. Subtitles: Exactly 2 clean, legible lines centered under the photo */
+.landing-info {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  width: 100%;
+  margin: 14px auto 0 auto;
+}
+
+/* Line 1: IA & DATA ENGINEER */
+.landing-title-line-1 {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(20px, 4.2vw, 32px);
+  font-weight: 800;
+  color: #c481ff;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin: 0;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Line 2: GOOGLE CLOUD SOLUTIONS */
+.landing-title-line-2 {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(14px, 2.6vw, 20px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin: 0;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* DESKTOP BREAKPOINTS */
 @media screen and (min-width: 500px) {
   .landing-circle2 {
     display: block;
-  }
-
-  .character-model {
-    z-index: 0;
-  }
-
-  .landing-info h3 {
-    font-size: 18px;
-  }
-
-  .landing-intro h2 {
-    font-size: 18px;
-  }
-
-  .landing-intro h1 {
-    font-size: 30px;
-    line-height: 30px;
-  }
-
-  .landing-info h2 {
-    font-size: 35px;
-    line-height: 40px;
-  }
-
-  h2.landing-info-h2 {
-    font-size: 38px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .character-model {
-    height: 80vh;
-  }
-
-  .landing-intro h2 {
-    font-size: 25px;
-  }
-
-  .landing-intro h1 {
-    font-size: 40px;
-    line-height: 35px;
-  }
-
-  .landing-info h3 {
-    font-size: 25px;
-  }
-
-  .landing-info h2 {
-    font-size: 45px;
-    line-height: 42px;
-  }
-
-  h2.landing-info-h2 {
-    font-size: 55px;
   }
 }
 
@@ -343,7 +265,7 @@ h2.landing-info-h2 {
   .character-model {
     height: 100vh;
     bottom: 0;
-    z-index: 11;
+    z-index: 5;
     position: fixed;
   }
 
@@ -351,72 +273,9 @@ h2.landing-info-h2 {
   .character-model::before {
     display: none;
   }
-
-  .landing-intro {
-    top: 40%;
-    left: auto;
-    right: 66%;
-    transform: translate(0%, -50%);
-  }
-
-  .landing-info {
-    bottom: auto;
-    top: 51%;
-    z-index: inherit;
-    text-align: left;
-    transform: translate(0%, -50%);
-    right: auto;
-    left: 66%;
-  }
 }
 
-@media screen and (min-width: 1200px) {
-  .landing-intro {
-    top: 40%;
-    left: auto;
-    right: 70%;
-    transform: translate(0%, -50%);
-  }
-
-  .landing-info {
-    bottom: auto;
-    top: 51%;
-    z-index: inherit;
-    text-align: left;
-    transform: translate(0%, -50%);
-    right: auto;
-    left: 70%;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .landing-intro h2 {
-    font-size: 35px;
-  }
-
-  .landing-intro h1 {
-    font-size: 60px;
-    line-height: 55px;
-  }
-
-  .landing-info h3 {
-    font-size: 35px;
-  }
-
-  .landing-info h2 {
-    font-size: 65px;
-    line-height: 62px;
-  }
-
-  h2.landing-info-h2 {
-    font-size: 75px;
-  }
-}
-
-/* ==========================================================================
-   MOBILE RESPONSIVE OVERRIDES (max-width: 768px)
-   Placed at the end of the stylesheet to guarantee proper cascade priority
-   ========================================================================== */
+/* MOBILE RESPONSIVE OVERRIDES */
 @media only screen and (max-width: 768px) {
   .character-model {
     display: none !important;
@@ -424,167 +283,16 @@ h2.landing-info-h2 {
 
   .landing-section,
   .landing-container {
-    height: auto !important;
     min-height: 100vh;
-    max-width: 100vw;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 0 15px;
-    padding-bottom: 40px;
-    overflow-x: hidden !important;
+    padding: 80px 15px 40px 15px;
   }
 
-  /* Spacing for Name */
-  .landing-intro {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-    padding-top: 40px;
-    margin-bottom: 20px;
-    z-index: 10;
-    text-align: center;
-    width: 100% !important;
-    order: 1;
-    height: auto !important;
+  .landing-hero-photo {
+    max-width: 320px;
+    margin: 5px auto 10px auto;
   }
 
-  .landing-intro h1 {
-    word-spacing: 0.1em;
-    font-size: 32px !important;
-    line-height: 1.2 !important;
-    margin: 0;
-    text-align: center;
-  }
-
-  .landing-intro h1 br {
-    display: block;
-    content: " ";
-    margin-bottom: 5px;
-  }
-
-  /* Mobile Photo */
-  .mobile-photo {
-    display: block !important;
-    position: relative !important;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    z-index: 1;
-    order: 2;
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    pointer-events: none;
-    transform: none !important;
-  }
-
-  .mobile-photo img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 0 40px rgba(194, 164, 255, 0.4));
-  }
-
-  /* Subtitles Container - Perfectly Centered */
   .landing-info {
-    position: relative !important;
-    top: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: auto !important;
-    transform: none !important;
-    text-align: center !important;
-    margin: 20px auto 0 auto !important;
-    padding: 0 10px 50px 10px !important;
-    z-index: 10;
-    background: transparent !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    height: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    order: 3;
-    overflow: visible !important;
-  }
-
-  .landing-info h3 {
-    display: none !important;
-  }
-
-  /* Subtitles Headings */
-  .landing-info h2,
-  h2.landing-info-h2 {
-    position: static !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    text-align: center !important;
-    height: auto !important;
-    transform: none !important;
-    white-space: normal !important;
-    box-sizing: border-box !important;
-    letter-spacing: 1px !important;
-  }
-
-  .landing-h2-1,
-  .landing-h2-info {
-    position: static !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    height: auto !important;
-    transform: none !important;
-    white-space: normal !important;
-    box-sizing: border-box !important;
-  }
-
-  .landing-h2-1 {
-    font-size: clamp(20px, 5.8vw, 25px) !important;
-    line-height: 1.3 !important;
-    color: var(--accentColor) !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-  }
-
-  .landing-h2-info {
-    font-size: clamp(15px, 4.4vw, 18px) !important;
-    line-height: 1.3 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-align: center !important;
-    font-weight: 500 !important;
-  }
-
-  /* Center any split text containers generated by GSAP / TextSplitter */
-  .landing-info .split-h2,
-  .landing-info .split-line {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    overflow: visible !important;
-    flex-wrap: wrap !important;
-  }
-
-  .landing-info-h2::after {
-    display: none !important;
+    margin-top: 10px;
   }
 }

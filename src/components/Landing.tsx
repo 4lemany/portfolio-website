@@ -8,41 +8,42 @@ const Landing = ({ children }: PropsWithChildren) => {
   const lastName = nameParts.slice(1).join(" ") || "";
 
   return (
-    <>
-      <div className="landing-section" id="landingDiv">
-        <div className="landing-container">
-          <div className="landing-intro">
-            <h2>Hello! I'm</h2>
-            <h1>
-              {firstName.toUpperCase()}
-              {' '}
-              <br />
-              {lastName && <span>{lastName.toUpperCase()}</span>}
-            </h1>
-          </div>
-          <div className="landing-info">
-            <h3>An</h3>
-            <h2 className="landing-info-h2">
-              <div className="landing-h2-1">IA & Data Engineer</div>
-            </h2>
-            <h2>
-              <div className="landing-h2-info">Google Cloud Solutions</div>
-            </h2>
-          </div>
-          {/* Mobile photo - shows only on mobile when 3D character is hidden */}
-          <div className="mobile-photo">
-            <img
-              src="/images/mypic.jpeg"
-              alt={config.developer.fullName}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </div>
+    <div className="landing-section" id="landingDiv">
+      <div className="landing-container">
+        {/* Top Name Greeting */}
+        <div className="landing-intro">
+          <h2>Hello! I'm</h2>
+          <h1>
+            {firstName.toUpperCase()}
+            {' '}
+            <br />
+            {lastName && <span>{lastName.toUpperCase()}</span>}
+          </h1>
         </div>
-        {children}
+
+        {/* Central Hero Photo (shown on mobile, and on desktop before 3D avatar appears) */}
+        <div className="landing-hero-photo">
+          <img
+            src="/images/mypic.jpeg"
+            alt={config.developer.fullName}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+
+        {/* Subtitle in 2 clean, legible lines centered under the photo */}
+        <div className="landing-info">
+          <h2 className="landing-title-line-1">
+            IA & DATA ENGINEER
+          </h2>
+          <h3 className="landing-title-line-2">
+            GOOGLE CLOUD SOLUTIONS
+          </h3>
+        </div>
       </div>
-    </>
+      {children}
+    </div>
   );
 };
 

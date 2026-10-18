@@ -38,6 +38,19 @@
   transform: translateY(-2px);
 }
 
+.cta-btn-papers {
+  background: rgba(255, 210, 30, 0.12);
+  color: #ffdf5d;
+  border: 1px solid rgba(255, 210, 30, 0.35);
+}
+
+.cta-btn-papers:hover {
+  background: rgba(255, 210, 30, 0.22);
+  border-color: #ffd21e;
+  box-shadow: 0 8px 30px rgba(255, 210, 30, 0.25);
+  transform: translateY(-2px);
+}
+
 .cta-btn-hire {
   background: var(--accentColor);
   color: #000;

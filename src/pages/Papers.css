@@ -1,0 +1,96 @@
+/* ==========================================================================
+   PAPERS DEDICATED PAGE STYLES
+   ========================================================================== */
+
+.papers-page {
+  min-height: 100vh;
+  background-color: var(--backgroundColor, #0b080c);
+  color: #ffffff;
+  padding: 40px 20px 100px 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.papers-page-header {
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.papers-page-header .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #c2a4ff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.2);
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.papers-page-header .back-button:hover {
+  background: rgba(255, 210, 30, 0.15);
+  border-color: #ffd21e;
+  color: #ffd21e;
+  transform: translateX(-3px);
+}
+
+.papers-page-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.papers-page-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffdf5d;
+  text-transform: uppercase;
+}
+
+.papers-page-title-box h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.papers-page-title-box h1 span {
+  background: linear-gradient(135deg, #ffd21e 0%, #c481ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.papers-page-title-box p {
+  color: #9f9ba6;
+  font-size: 15px;
+  max-width: 750px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.papers-page-content {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.papers-page-content .daily-papers-section {
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .papers-page {
+    padding: 24px 15px 60px 15px;
+  }
+}

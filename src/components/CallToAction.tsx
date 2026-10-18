@@ -10,6 +10,10 @@ const CallToAction = () => {
           Play With Me →
         </Link>
         
+        <Link to="/papers" className="cta-btn cta-btn-papers" data-cursor="disable">
+          Daily Papers & Podcast →
+        </Link>
+
         <a 
           href={config.contact.linkedin} 
           target="_blank" 
