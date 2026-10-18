@@ -87,8 +87,8 @@ def call_gemini_api(api_key, papers):
     """
     print(" Calling Gemini API to generate podcast script and slides in Spanish (Spain)...")
     
-    # Candidate models in order of priority
-    models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+    # Candidate models in order of priority: Gemini 3.8 and Gemini 4 Argon
+    candidate_models = ["gemini-3.8-flash", "gemini-4-argon", "gemini-3.8-pro"]
     
     system_prompt = (
         "Eres el director de un programa divulgativo de inteligencia artificial y ciencia en España, "
@@ -169,7 +169,7 @@ El diálogo del podcast debe tener entre 10 y 16 turnos de conversación en tota
     req_data = json.dumps(payload).encode("utf-8")
 
     custom_model = os.environ.get("GEMINI_MODEL")
-    candidate_models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
+    candidate_models = ["gemini-3.8-flash", "gemini-4-argon", "gemini-3.8-pro", "gemini-4"]
     if custom_model:
         clean_model = custom_model.replace("models/", "").strip()
         models = [clean_model] + [m for m in candidate_models if m != clean_model]

@@ -105,8 +105,8 @@ async function callGemini(apiKey, messages) {
         };
     }
 
-    // Directly target Google's active Gemini 3.6 Flash model
-    const model = (process.env.GEMINI_MODEL || 'gemini-3.6-flash').replace(/^models\//, '');
+    // Directly target Google's active Gemini 3.8 Flash model
+    const model = (process.env.GEMINI_MODEL || 'gemini-3.8-flash').replace(/^models\//, '');
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
