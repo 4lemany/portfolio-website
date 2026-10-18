@@ -32,7 +32,7 @@
 .landing-circle1 {
   top: 0%;
   left: 0%;
-  z-index: 15;
+  z-index: 1;
   position: fixed;
   width: 300px;
   height: 300px;
@@ -50,7 +50,7 @@
   top: 50%;
   right: 0%;
   transform: translate(calc(100% - 2px), -50%);
-  z-index: 9;
+  z-index: 1;
   position: fixed;
   display: none;
   width: 300px;
@@ -203,6 +203,8 @@
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
 .landing-hero-photo img {
@@ -210,6 +212,14 @@
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 45px rgba(194, 164, 255, 0.45));
+}
+
+/* En desktop, al terminar de cargar el avatar 3D, desvanecemos la foto real para que no se superpongan */
+body.character-ready .landing-hero-photo {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  pointer-events: none;
 }
 
 /* 3. Subtitles: Exactly 2 clean, legible lines centered under the photo */
@@ -287,7 +297,11 @@
     padding: 80px 15px 40px 15px;
   }
 
-  .landing-hero-photo {
+  .landing-hero-photo,
+  body.character-ready .landing-hero-photo {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
     max-width: 320px;
     margin: 5px auto 10px auto;
   }
