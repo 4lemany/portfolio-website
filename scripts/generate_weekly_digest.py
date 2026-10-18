@@ -168,6 +168,14 @@ El diálogo del podcast debe tener entre 10 y 16 turnos de conversación en tota
 
     req_data = json.dumps(payload).encode("utf-8")
 
+    custom_model = os.environ.get("GEMINI_MODEL")
+    candidate_models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash"]
+    if custom_model:
+        clean_model = custom_model.replace("models/", "").strip()
+        models = [clean_model] + [m for m in candidate_models if m != clean_model]
+    else:
+        models = candidate_models
+
     for model in models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
         try:
@@ -191,6 +199,12 @@ El diálogo del podcast debe tener entre 10 y 16 turnos de conversación en tota
                 parsed = json.loads(raw_text.strip())
                 print(f" Success with model {model}!")
                 return parsed
+        except urllib.error.HTTPError as http_err:
+            try:
+                err_details = http_err.read().decode("utf-8", errors="ignore")
+                print(f" Model {model} failed (HTTP {http_err.code}): {err_details}")
+            except Exception:
+                print(f" Model {model} failed (HTTP {http_err.code}): {http_err}")
         except Exception as e:
             print(f" Model {model} failed: {e}")
 
