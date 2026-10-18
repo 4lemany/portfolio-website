@@ -1,0 +1,103 @@
+{
+  "weekTitle": "Semana de Vanguardia: Razonamiento en LLMs, Agentes Autónomos y Destilación Eficiente",
+  "dateRange": "Semana actual • Los más votados en Hugging Face",
+  "introduction": "Esta semana la comunidad de Hugging Face ha puesto el foco en la democratización del razonamiento profundo ('test-time compute'), la compresión de modelos de visión sin pérdida de precisión y nuevas arquitecturas de agentes autónomos con memoria a largo plazo.",
+  "generatedAt": "2026-10-18T20:00:00.000Z",
+  "audioUrl": "/digest/weekly_podcast.mp3",
+  "podcast": [
+    {
+      "speaker": "Álvaro",
+      "text": "¡Muy buenas a todos y bienvenidos a una nueva edición de nuestro repaso semanal de investigación! Hoy traemos los papers que más revuelo han causado en Hugging Face en los últimos siete días."
+    },
+    {
+      "speaker": "Elvira",
+      "text": "¡Hola a todos! La verdad es que esta semana viene cargadita de novedades espectaculares. Álvaro, el paper que encabeza los votos sobre razonamiento paso a paso mediante destilación abierta es sencillamente brillante."
+    },
+    {
+      "speaker": "Álvaro",
+      "text": "Totalmente, Elvira. Es que demuestra que no hace falta un clúster de supercomputación descomunal para lograr capacidades lógicas avanzadas; con cadenas de pensamiento sintetizadas y filtradas consiguen superar a modelos diez veces mayores."
+    },
+    {
+      "speaker": "Elvira",
+      "text": "Exacto. Y ojo también al segundo paper, centrado en arquitecturas multimodales para agentes. Aborda uno de los mayores quebraderos de cabeza actuales: cómo evitar las alucinaciones espaciales en la comprensión de diagramas y código visual."
+    },
+    {
+      "speaker": "Álvaro",
+      "text": "Una auténtica vuelta de tuerca. Y para los que estáis en la web, tenéis justo debajo las diapositivas interactivas con los gráficos de rendimiento y los enlaces directos tanto a arXiv como a Hugging Face para clonar los repositorios."
+    },
+    {
+      "speaker": "Elvira",
+      "text": "¡Sin duda! Os dejamos con las diapositivas detalladas. ¡Disfrutad del repaso y que tengáis una semana muy productiva en el laboratorio y con el código!"
+    }
+  ],
+  "slides": [
+    {
+      "slideNumber": 1,
+      "title": "Democratización del Razonamiento en LLMs",
+      "paperId": "2412.01234",
+      "paperTitle": "Deep Reasoning Distillation: Open Chains of Thought for Compact Models",
+      "keyPoints": [
+        "Destilación de procesos de deducción paso a paso a partir de modelos masivos.",
+        "Rendimiento competitivo en benchmarks matemáticos y de código (GSM8K, MATH).",
+        "Reducción de coste de inferencia en un 78% frente a arquitecturas monolíticas."
+      ],
+      "takeaway": "El futuro del razonamiento lógico ya no es exclusivo de los gigantes; los modelos compactos destilados ofrecen paridad a una fracción del coste."
+    },
+    {
+      "slideNumber": 2,
+      "title": "Visión Espacial y Agentes Multimodales",
+      "paperId": "2412.05678",
+      "paperTitle": "Grounding Without Hallucination: Robust Spatial Reasoning in Vision-Language Models",
+      "keyPoints": [
+        "Alineación de atención espacial directa para diagramas y capturas de pantalla.",
+        "Mecanismo de verificación de coordenadas visuales integrado en la fase de decodificación.",
+        "Cero alucinaciones en detección de interfaces gráficas y lectura de tablas densas."
+      ],
+      "takeaway": "Los agentes web y de escritorio dan un salto crítico de fiabilidad al interpretar interfaces reales con precisión milimétrica."
+    },
+    {
+      "slideNumber": 3,
+      "title": "Memoria Jerárquica para Agentes Autónomos",
+      "paperId": "2412.08901",
+      "paperTitle": "Episodic vs Semantic: Multi-Tier Memory for Long-Horizon Agentic Workflows",
+      "keyPoints": [
+        "Separación inspirada en la neurociencia entre memoria episódica a corto plazo y semántica duradera.",
+        "Sistemas RAG basados en grafos temporales con compresión contextual progresiva.",
+        "Retención sin pérdida de contexto en tareas que superan las 48 horas de ejecución continua."
+      ],
+      "takeaway": "Los agentes pasan de ser ejecutores de un solo turno a colaboradores capaces de recordar proyectos completos a lo largo de semanas."
+    }
+  ],
+  "papers": [
+    {
+      "id": "2412.01234",
+      "title": "Deep Reasoning Distillation: Open Chains of Thought for Compact Models",
+      "upvotes": 420,
+      "authors": ["A. Chen", "M. Kovacs", "S. Garcia", "L. Wei"],
+      "publishedAt": "2026-10-15",
+      "hfUrl": "https://huggingface.co/papers",
+      "pdfUrl": "https://arxiv.org",
+      "githubRepo": "https://github.com"
+    },
+    {
+      "id": "2412.05678",
+      "title": "Grounding Without Hallucination: Robust Spatial Reasoning in Vision-Language Models",
+      "upvotes": 385,
+      "authors": ["J. Miller", "E. Rossi", "D. Tanaka"],
+      "publishedAt": "2026-10-14",
+      "hfUrl": "https://huggingface.co/papers",
+      "pdfUrl": "https://arxiv.org",
+      "githubRepo": "https://github.com"
+    },
+    {
+      "id": "2412.08901",
+      "title": "Episodic vs Semantic: Multi-Tier Memory for Long-Horizon Agentic Workflows",
+      "upvotes": 312,
+      "authors": ["H. Santos", "R. Becker", "V. Patel"],
+      "publishedAt": "2026-10-13",
+      "hfUrl": "https://huggingface.co/papers",
+      "pdfUrl": "https://arxiv.org",
+      "githubRepo": "https://github.com"
+    }
+  ]
+}

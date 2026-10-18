@@ -1,0 +1,53 @@
+name: Weekly AI Papers Podcast & Digest
+
+on:
+  schedule:
+    # Runs every Sunday at 22:00 UTC (midnight in Spain CET)
+    - cron: '0 22 * * 0'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  generate-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install system dependencies (ffmpeg)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts requests
+
+      - name: Run weekly digest & podcast generator
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/generate_weekly_digest.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/digest/ src/data/
+          if git diff --staged --quiet; then
+            echo "No changes detected to commit."
+          else
+            git commit -m "🤖 Resumen semanal automático: Papers más votados & Podcast [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

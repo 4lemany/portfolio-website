@@ -12,6 +12,7 @@ import {
 import { FaArrowUp, FaRegFilePdf, FaGithub } from "react-icons/fa6";
 import { useDailyPapers } from "../hooks/useDailyPapers";
 import { SortOption } from "../types/papers";
+import WeeklyDigest from "./WeeklyDigest";
 import "./styles/DailyPapers.css";
 
 // Quick filter categories
@@ -190,6 +191,9 @@ export const DailyPapers = () => {
           Machine Learning más influyentes publicados hoy en Hugging Face y arXiv.
         </p>
       </div>
+
+      {/* WEEKLY DIGEST & PODCAST CARD */}
+      <WeeklyDigest />
 
       {/* SEARCH AND CONTROLS */}
       <div className="papers-controls-box">
