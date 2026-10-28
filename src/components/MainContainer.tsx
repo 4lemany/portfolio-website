@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
+import LoadingScreen from "./LoadingScreen";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
@@ -18,6 +19,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   );
   const [isMobile] = useState<boolean>(window.innerWidth <= 768);
   const [shouldRenderCharacter, setShouldRenderCharacter] = useState(false);
+  const [loadingDone, setLoadingDone] = useState(false);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -64,7 +66,10 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Cursor />
       <Navbar />
       <SocialIcons />
-      {isDesktopView && !isMobile && shouldRenderCharacter && children}
+      {(!loadingDone && isDesktopView && !isMobile) && (
+        <LoadingScreen onComplete={() => setLoadingDone(true)} />
+      )}
+      {isDesktopView && !isMobile && loadingDone && shouldRenderCharacter && children}
       <div className="container-main">
         <Landing />
         <About />
