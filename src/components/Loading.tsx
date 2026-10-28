@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 import { config } from "../config";
+import LinktreeHero from "./LinktreeHero";
 
 import Marquee from "react-fast-marquee";
 
@@ -45,6 +46,7 @@ const Loading = ({ percent }: { percent: number }) => {
 
   return (
     <>
+<div className="preload-linktree"><LinktreeHero /></div>
       <div className="loading-header">
         <a href="/#" className="loader-title" data-cursor="disable">
           {config.developer.fullName}

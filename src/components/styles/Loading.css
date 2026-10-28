@@ -370,3 +370,14 @@
     padding: 0px 20px;
   }
 }
+/* Preload Linktree (visible before loading finishes) */
+.preload-linktree {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 520px;
+  z-index: 1000000001;
+  text-align: center;
+}
