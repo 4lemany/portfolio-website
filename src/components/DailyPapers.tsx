@@ -13,6 +13,7 @@ import { FaArrowUp, FaRegFilePdf, FaGithub } from "react-icons/fa6";
 import { useDailyPapers } from "../hooks/useDailyPapers";
 import { SortOption } from "../types/papers";
 import WeeklyDigest from "./WeeklyDigest";
+import ValenciaNews from "./ValenciaNews";
 import "./styles/DailyPapers.css";
 
 // Quick filter categories
@@ -488,6 +489,8 @@ export const DailyPapers = () => {
           </button>
         </div>
       )}
+      {/* VALENCIA PLAZA — LOCAL NEWS */}
+      <ValenciaNews />
     </section>
   );
 };

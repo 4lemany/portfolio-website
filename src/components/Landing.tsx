@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import "./styles/Landing.css";
 import { config } from "../config";
+import LinktreeHero from "./LinktreeHero";
 
 const Landing = ({ children }: PropsWithChildren) => {
   const nameParts = config.developer.fullName.split(" ");
@@ -39,6 +40,9 @@ const Landing = ({ children }: PropsWithChildren) => {
             GOOGLE CLOUD SOLUTIONS
           </h3>
         </div>
+
+        {/* Linktree-style quick links */}
+        <LinktreeHero />
       </div>
       {children}
     </div>
