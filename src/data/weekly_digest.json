@@ -1,129 +1,123 @@
 {
-  "weekTitle": "La rebelión del Sistema 1 y la memoria de mundo",
+  "weekTitle": "La eclosión de los modelos de Sistema 1 y la destilación de precisión",
   "dateRange": "Semana actual • Los más votados en Hugging Face",
-  "introduction": "Esta semana en Hugging Face presenciamos un giro de guion fascinante en la investigación: el salto hacia modelos 'Sistema 1' que descartan la generación token por token para tomar decisiones ultrarrápidas y estructuradas. Además, exploramos nuevas técnicas de destilación para razonamiento post-RL, evaluación audiovisual estricta y consistencia espacial infinita en vídeo.",
+  "introduction": "Esta semana presenciamos una auténtica eclosión de la arquitectura de 'Sistema 1', diseñada para la toma de decisiones instantáneas sin pasar por la costosa decodificación autorregresiva. Además, analizamos avances en la destilación guiada de políticas RL y marcos avanzados para generación de vídeo coherente.",
   "podcast": [
     {
       "speaker": "Álvaro",
-      "text": "¡Muy buenas a todos! Elvira, esta semana la comunidad de Hugging Face viene cargadita y con un denominador común apasionante: dejar de generar texto palabra por palabra para tareas donde lo que necesitas es una decisión instantánea y estructurada."
+      "text": "¡Muy buenas a todos! Menuda semana nos espera, Elvira. Parece que la comunidad de IA se ha puesto de acuerdo para cuestionar la generación autorregresiva tradicional con la eclosión del paradigma de 'Sistema 1'."
     },
     {
       "speaker": "Elvira",
-      "text": "¡Totalmente de acuerdo, Álvaro! Es que la irrupción de la familia Jeva, con su arquitectura base, VideoJev y MJev-Spatial, es una auténtica vuelta de tuerca. Demuestran que para responder opciones múltiples o ubicar un objeto en pantalla no hace falta decodificación autorregresiva lenta, sino clasificación directa reutilizando pesos preentrenados."
+      "text": "¡Totalmente de acuerdo, Álvaro! Es que generar texto token a token para responder a opciones múltiples o tomar decisiones inmediatas es ineficiente por naturaleza. Papers como Jeva, VideoJev y MJev-Spatial le dan una vuelta de tuerca brutal a esto."
     },
     {
       "speaker": "Álvaro",
-      "text": "Brutal lo de VideoJev acelerando más de cien veces las consultas en vídeo sobre la misma memoria visual, y MJev-Spatial resolviendo tareas espaciales sin añadir un solo parámetro, solo afinando la atención existente. Pero ojo a esto en razonamiento: Waypoint-OPD le da un repaso a la destilación por RL."
+      "text": "¡Ojo a esto! En VideoJev logran aceleraciones de más de cien veces en preguntas sobre vídeo sustituyendo la decodificación por cabeceras de puntuación directas sobre la evidencia. Y en MJev-Spatial aplican esa misma intuición al razonamiento espacial."
     },
     {
       "speaker": "Elvira",
-      "text": "Ese paper es brillante por su sencillez conceptual. En vez de copiar a ciegas el salto de políticas antes y después del RL, meten un punto de control intermedio para ver si el profesor evolucionó de forma coherente o si hubo bandazos que se cancelaron entre sí."
+      "text": "Es un enfoque súper elegante. Pero claro, para medir todo esto bien necesitamos mejores herramientas, y ahí entra OmniCompass, un benchmark holístico que pone a prueba a 50 MLLMs en comprensión omnimodal de vídeo."
     },
     {
       "speaker": "Álvaro",
-      "text": "Si las direcciones de cambio en la primera y segunda mitad del entrenamiento no coinciden, se filtra esa señal. El resultado: mejores puntuaciones en razonamiento matemático y de código en todos los tamaños evaluados con un coste computacional ínfimo."
+      "text": "Y ojo, porque demuestra que a los modelos abiertos aún les cuesta la integración audio-visual precisa. Por otra parte, en alineación pura, Waypoint-OPD me ha parecido una maravilla técnica para la destilación de modelos entrenados con RL."
     },
     {
       "speaker": "Elvira",
-      "text": "Y hablando de evaluar con rigor, OmniCompass pone a prueba la multimodalidad de verdad. Evalúa audio y vídeo de forma conjunta en temporalidad, espacio y comprensión, revelando que incluso los modelos punteros sufren horrores para ubicar con precisión el 'dónde' y el 'cuándo'."
+      "text": "¡Brutal! Evalúan el acuerdo direccional entre checkpoints intermedios del profesor para filtrar transferencias de conocimiento contradictorias en el estudiante. Cero ruido extra durante el proceso."
     },
     {
       "speaker": "Álvaro",
-      "text": "Y para rematar la faena cinematográfica, el framework ATAS resuelve el gran talón de Aquiles de la generación agéntica de vídeo de larga duración: la consistencia del entorno al volver a rodar en el mismo escenario."
+      "text": "Y para rematar el menú técnico de la semana, ATAS soluciona la falta de coherencia en la generación de vídeo largo creando memorias implícitas de geometría 3D y eventos. Una auténtica pasada."
     },
     {
       "speaker": "Elvira",
-      "text": "En lugar de pasarse fotogramas como un teléfono escacharrado, mantienen una memoria 3D y de eventos del estado del mundo. Si un personaje vuelve a la cocina veinte planos después, la geometría y los objetos siguen exactamente en su sitio. ¡Una semana redonda!"
+      "text": "Sin duda, una semana repleta de arquitectura nativa de decisión e ingeniería de representación. ¡Vamos al grano a repasar los puntos clave de cada investigación!"
     }
   ],
   "slides": [
     {
       "slideNumber": 1,
-      "title": "Waypoint-OPD: Destilación Guiada de Desplazamientos de RL",
-      "paperId": "2502.04356",
+      "title": "Waypoint-OPD: Destilación de políticas RL mediante filtrado direccional",
+      "paperId": "paper-1",
       "paperTitle": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
       "keyPoints": [
-        "Identifica que el cambio global de política post-RL puede ocultar fluctuaciones locales contradictorias.",
-        "Introduce un 'waypoint' intermedio del profesor para medir la concordancia direccional entre etapas tempranas y tardías.",
-        "Aplica un filtrado por compuerta ('gated transfer') que suprime señales cuando las etapas apuntan en direcciones opuestas.",
-        "Supera a los métodos de destilación convencionales en razonamiento matemático y de código en estudiantes Qwen3."
+        "Identifica que los cambios de política finales tras RL pueden ocultar fluctuaciones contradictorias durante el entrenamiento.",
+        "Utiliza un checkpoint intermedio del profesor para medir el acuerdo direccional entre los cambios de política tempranos y tardíos.",
+        "Filtra la transferencia hacia el estudiante si los cambios intermedios y finales apuntan en direcciones opuestas."
       ],
-      "takeaway": "Filtrar el ruido de optimización mediante coherencia temporal en el profesor maximiza la transferencia efectiva de razonamiento al estudiante."
+      "takeaway": "Supera la destilación basada solo en el punto final de RL garantizando una transferencia consistente y sin ruido en tareas de razonamiento matemático y código."
     },
     {
       "slideNumber": 2,
-      "title": "OmniCompass: Benchmark Holístico Audio-Visual",
-      "paperId": "2502.04357",
+      "title": "OmniCompass: Benchmark holístico para comprensión omnimodal de vídeo",
+      "paperId": "paper-2",
       "paperTitle": "OmniCompass: A Holistic Benchmark for Omni-Modal Video Grounding and Understanding",
       "keyPoints": [
-        "Evalúa modelos de lenguaje multimodales en dos pistas: visión-lenguaje (VL) y audio-visual omnimodal (AV).",
-        "Estructura las pruebas en tres tareas complementarias: localización temporal (TG), espacial (SG) y preguntas-respuestas (QA).",
-        "Incluye 1.060 vídeos con 3.180 instancias validadas manualmente bajo especificaciones de texto y texto+imagen.",
-        "Demuestra que los modelos abiertos aún van a la zaga y que el 'grounding' preciso sigue siendo el gran cuello de botella."
+        "Introduce dos tracks de evaluación: OmniCompass-VL (visión-lenguaje) y OmniCompass-AV (audio-visual).",
+        "Evalúa tres tareas fundamentales: grounding temporal, grounding espacial y respuesta a preguntas (QA).",
+        "Evaluación masiva sobre 50 MLLMs revelando que los modelos open-source aún sufren en la integración conjunta audio-visual."
       ],
-      "takeaway": "La comprensión profunda de vídeo exige integrar audio y geometría temporal, donde incluso los mejores modelos propietarios muestran inconsistencias."
+      "takeaway": "Establece un estándar riguroso para diagnosticar las limitaciones actuales en la percepción y razonamiento espacio-temporal de modelos de vídeo."
     },
     {
       "slideNumber": 3,
-      "title": "Jeva: Modelos Sistema 1 desde Primeros Principios",
-      "paperId": "2502.04358",
+      "title": "Jeva: Modelos de Sistema 1 desde principios fundamentales",
+      "paperId": "paper-3",
       "paperTitle": "Jeva: System One Models from First Principles",
       "keyPoints": [
-        "Abandona la predicción de texto serializado para respetar las restricciones estructurales del problema de decisión.",
-        "Garantiza invariancia a permutaciones de opciones, detección explícita de ausencia de respuesta (null-aware) y escalabilidad.",
-        "Implementa un codificador compartido con memoria de opciones inmutable, permitiendo reutilizar cómputo ('caching') entre peticiones.",
-        "Logra latencias ultra-bajas con cero fallos por orden de candidatos y escalabilidad a miles de opciones."
+        "Reemplaza la predicción autorregresiva de texto por una arquitectura de decisión nativa en una sola pasada.",
+        "Garantiza propiedades clave: invarianza ante permutación de opciones, escalabilidad en candidatos y detección explícita de opción nula.",
+        "Permite reutilizar la memoria de opciones entre solicitudes independientes, reduciendo drásticamente la latencia."
       ],
-      "takeaway": "Un diseño nativo de toma de decisiones permite sustituir la lenta generación autorregresiva por inferencia estructurada de alta velocidad."
+      "takeaway": "Demuestra que la toma de decisiones estructurada puede ser masivamente más rápida y consistente sin la necesidad de decodificar tokens secuencialmente."
     },
     {
       "slideNumber": 4,
-      "title": "VideoJev: Decisiones Rápidas en Interacción con Vídeo",
-      "paperId": "2502.04359",
+      "title": "VideoJev: Decisiones estructuradas y eficientes en comprensión de vídeo",
+      "paperId": "paper-4",
       "paperTitle": "VideoJev: System One Model for Video Understanding and Interaction",
       "keyPoints": [
-        "Adapta MLLMs preentrenados reemplazando la decodificación autorregresiva por una cabeza compartida de puntuación.",
-        "Unifica la localización temporal y el test de opciones múltiples puntuando intervalos y textos directamente contra el vídeo.",
-        "Reutiliza el cómputo visual mediante caché e inferencia conjunta de múltiples preguntas en una sola pasada hacia adelante.",
-        "Acelera la inferencia más de 100 veces respecto a modos 'Thinking' tradicionales con mejoras de mIoU de hasta 10.8 puntos."
+        "Adapta MLLMs sustituyendo la decodificación por cabeceras compartidas que puntúan intervalos temporales y opciones de texto.",
+        "Soporta inferencia en caché y compartida para consultas múltiples sobre un mismo historial de vídeo.",
+        "Alcanza reducciones de latencia de hasta 100x en QA de vídeo manteniendo el rendimiento de los modelos base."
       ],
-      "takeaway": "Convierte la comprensión de vídeo en un motor de decisiones 'Sistema 1' listo para agentes autónomos en tiempo real."
+      "takeaway": "Aporta una interfaz de decisión reutilizable y ultrarrápida esencial para agentes visuales interactivos en tiempo real."
     },
     {
       "slideNumber": 5,
-      "title": "MJev-Spatial: Inteligencia Espacial sin Generación de Tokens",
-      "paperId": "2502.04360",
+      "title": "MJev-Spatial: Inteligencia espacial de Sistema 1 mediante atención nativa",
+      "paperId": "paper-5",
       "paperTitle": "MJev-Spatial: System One Spatial Intelligence via Native Attention Matching",
       "keyPoints": [
-        "Modela tareas espaciales (elección, estimación escalar y coordenadas 2D) como clasificación coarse-to-fine unificada.",
-        "Aprovecha las proyecciones Query-Key preentrenadas del propio modelo sin añadir parámetros adicionales.",
-        "Ejecuta decisiones espaciales complejas en una sola pasada hacia adelante sin emitir texto libre ni requerir parseo.",
-        "Supera a los modelos autorregresivos base en 12 benchmarks siendo hasta 5.6 veces más rápido."
+        "Unifica tareas de elección, predicción numérica y localización 2D dentro de un marco de clasificación directa.",
+        "Calcula puntuaciones usando las proyecciones Query-Key existentes sin añadir parámetros adicionales al backbone.",
+        "Aumenta la eficiencia de entrenamiento un 30.8% y ejecuta inferencias entre 2.5x y 5.6x más rápido que los modelos autorregresivos."
       ],
-      "takeaway": "El razonamiento espacial de precisión no necesita verborrea generativa; basta con explotar los pesos de atención nativos."
+      "takeaway": "Ofrece un rendimiento espacial líder en la industria eliminado por completo el coste de la decodificación de texto autorregresiva."
     },
     {
       "slideNumber": 6,
-      "title": "ATAS: Generación de Vídeo Agéntico Centrada en el Mundo",
-      "paperId": "2502.04361",
+      "title": "ATAS: Framework de estado del mundo para generación de vídeo agentil",
+      "paperId": "paper-6",
       "paperTitle": "Any Time, Any Space: A World-State-Centric Framework for Agentic Video Generation",
       "keyPoints": [
-        "Descompone guiones cinematográficos en tomas vinculadas a memoria de escena 3D y registro temporal de eventos.",
-        "Evita la deriva de apariencia al revisitar ubicaciones previas recuperando la geometría estática registrada.",
-        "Reconstruye e incorpora nuevas observaciones a la memoria sólo si superan rigurosos chequeos de estado.",
-        "Consigue el mejor rendimiento de consistencia cross-shot y valoración humana sobre cuatro generadores de vídeo base."
+        "Mantiene una memoria de escena (geometría 3D) y una memoria de eventos (observaciones temporales) a partir del guion.",
+        "Verifica y actualiza el estado del mundo solo tras validar los clips generados mediante revisiones de consistencia.",
+        "Mejora significativamente la coherencia espacial y temporal en re-visitas a escenas y eventos a lo largo de secuencias de vídeo largas."
       ],
-      "takeaway": "El futuro de los cortometrajes generados por IA reside en desacoplar la memoria persistente del mundo de la síntesis de fotogramas."
+      "takeaway": "Resuelve la falta de consistencia en generación de vídeo de larga duración acoplando la generación a una memoria de estado global."
     }
   ],
-  "generatedAt": "2026-10-18T20:35:39.973558",
+  "generatedAt": "2026-10-18T23:52:00.584159",
   "audioUrl": "/digest/weekly_podcast.mp3",
   "papers": [
     {
       "id": "2610.21601",
       "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
       "summary": "Policy-shift distillation reuses the difference between a teacher's log probabilities before and after reinforcement learning (RL) as supervision on student-generated trajectories. However, this endpoint policy shift cannot reveal whether local action preferences evolved consistently during teacher training. The same endpoint shift can result from early and late shifts that reinforce or partially cancel each other. We investigate whether agreement between early and late teacher policy shifts can guide selective transfer. We introduce Waypoint-guided On-Policy Distillation (Waypoint-OPD), which uses an intermediate teacher checkpoint from the same RL run to compare early and late shifts in relative action preferences at student-visited prefixes. We gate the endpoint shift according to the directional agreement between the early and late shifts, suppressing it when they point in opposing directions. Compared with endpoint-only transfer, our method requires only one additional frozen-teacher scoring pass. Using RL-trained Qwen3-4B teachers, we evaluate our method with Qwen3-8B, Qwen3-14B, and Qwen3-30B-A3B as student models in mathematical and code reasoning. In all six domain--student settings, Waypoint-OPD achieves the highest domain-average score among the compared distillation methods. Ablations with the Qwen3-8B student show that removing or shuffling gates reduces mathematical reasoning performance. These results support the use of directional agreement between early and late teacher policy shifts to weight the endpoint shift during student training.",
-      "upvotes": 667,
+      "upvotes": 668,
       "authors": [
         "Bingxi Hou",
         "Guochao Jiang",
