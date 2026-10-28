@@ -309,4 +309,12 @@ body.character-ready .landing-hero-photo {
   .landing-info {
     margin-top: 10px;
   }
+
+/* Linktree Hero visibility on desktop */
+.linktree-hero {
+  margin-top: 28px;
+  z-index: 10;
+  position: relative;
+}
+
 }
