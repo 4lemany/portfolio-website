@@ -46,7 +46,7 @@ const Loading = ({ percent }: { percent: number }) => {
 
   return (
     <>
-<div className="preload-linktree"><LinktreeHero /></div>
+
       <div className="loading-header">
         <a href="/#" className="loader-title" data-cursor="disable">
           {config.developer.fullName}

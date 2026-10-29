@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import LoadingScreen from "./LoadingScreen";
+import Loading from "./Loading";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
@@ -11,7 +11,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import TechStackNew from "./TechStackNew";
 import CallToAction from "./CallToAction";
-import LinktreeHero from "./LinktreeHero";
+
 import setSplitText from "./utils/splitText";
 
 const MainContainer = ({ children }: PropsWithChildren) => {
@@ -67,9 +67,9 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Cursor />
       <Navbar />
       <SocialIcons />
-<LinktreeHero />
+
       {(!loadingDone && isDesktopView && !isMobile) && (
-        <LoadingScreen onComplete={() => setLoadingDone(true)} />
+        <Loading onComplete={() => setLoadingDone(true)} />
       )}
       {isDesktopView && !isMobile && loadingDone && shouldRenderCharacter && children}
       <div className="container-main">
