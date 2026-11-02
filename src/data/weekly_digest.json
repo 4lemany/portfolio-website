@@ -1,211 +1,213 @@
 {
-  "weekTitle": "La eclosión de los modelos de Sistema 1 y la destilación de precisión",
+  "weekTitle": "Robótica con Física, Eficiencia Extrema y Agentes de Trabajo: Los TOP Papers de la Semana",
   "dateRange": "Semana actual • Los más votados en Hugging Face",
-  "introduction": "Esta semana presenciamos una auténtica eclosión de la arquitectura de 'Sistema 1', diseñada para la toma de decisiones instantáneas sin pasar por la costosa decodificación autorregresiva. Además, analizamos avances en la destilación guiada de políticas RL y marcos avanzados para generación de vídeo coherente.",
+  "introduction": "Esta semana la comunidad de Hugging Face ha puesto el foco en la eficiencia computacional y la interacción práctica con el mundo real. Analizamos desde modelos robóticos que entienden física sin latencia hasta técnicas que reducen el coste de cálculo en VLMs de difusión en casi un 65%.",
   "podcast": [
     {
       "speaker": "Álvaro",
-      "text": "¡Muy buenas a todos! Menuda semana nos espera, Elvira. Parece que la comunidad de IA se ha puesto de acuerdo para cuestionar la generación autorregresiva tradicional con la eclosión del paradigma de 'Sistema 1'."
+      "text": "¡Hola a todos! Menudo menú tenemos hoy en el programa, Elvira. Arrancamos con PDRVLA, un modelo de robótica que aprende física del mundo real prediciendo características visuales futuras sin meter la latencia de generar vídeo en directo."
     },
     {
       "speaker": "Elvira",
-      "text": "¡Totalmente de acuerdo, Álvaro! Es que generar texto token a token para responder a opciones múltiples o tomar decisiones inmediatas es ineficiente por naturaleza. Papers como Jeva, VideoJev y MJev-Spatial le dan una vuelta de tuerca brutal a esto."
+      "text": "¡Impresionante, Álvaro! Generar vídeo en tiempo real para controlar robots era un cuello de botella brutal. Y hablando de vídeo, OmniShowcase soluciona el problema de la consistencia en 360 grados usando mapas de normales de superficie guiados por la geometría 3D del objeto."
     },
     {
       "speaker": "Álvaro",
-      "text": "¡Ojo a esto! En VideoJev logran aceleraciones de más de cien veces en preguntas sobre vídeo sustituyendo la decodificación por cabeceras de puntuación directas sobre la evidencia. Y en MJev-Spatial aplican esa misma intuición al razonamiento espacial."
+      "text": "Es genial cómo conectan la estructura 3D real con la difusión de vídeo. Y ¡ojo a esto! En el apartado de audio, Falcon nos trae extracción de voz en streaming recortando la latencia nada menos que 11 veces respecto a los modelos estándar."
     },
     {
       "speaker": "Elvira",
-      "text": "Es un enfoque súper elegante. Pero claro, para medir todo esto bien necesitamos mejores herramientas, y ahí entra OmniCompass, un benchmark holístico que pone a prueba a 50 MLLMs en comprensión omnimodal de vídeo."
+      "text": "¡Es que pasar de benchmarks sintéticos al ruido caótico del mundo real era una asignatura pendiente! Además, si nos vamos a mundos virtuales, Hy-Nomas nos permite controlar cámaras e instrucciones de texto de forma continua en un modelo de difusión de 8 mil millones de parámetros."
     },
     {
       "speaker": "Álvaro",
-      "text": "Y ojo, porque demuestra que a los modelos abiertos aún les cuesta la integración audio-visual precisa. Por otra parte, en alineación pura, Waypoint-OPD me ha parecido una maravilla técnica para la destilación de modelos entrenados con RL."
+      "text": "Totalmente de acuerdo, Elvira. Y para poner un poco de orden a toda esta ola de agentes, el trabajo sobre 'Work Agents' propone un marco de nivel de sistema para entender cómo ejecutan tareas digitales complejas de extremo a extremo."
     },
     {
       "speaker": "Elvira",
-      "text": "¡Brutal! Evalúan el acuerdo direccional entre checkpoints intermedios del profesor para filtrar transferencias de conocimiento contradictorias en el estudiante. Cero ruido extra durante el proceso."
+      "text": "Una vuelta de tuerca muy necesaria para dejar de ver a los agentes como meros LLMs y empezar a tratar la persistencia del entorno. Y cerramos la semana con LOWN, que me ha dejado boquiabierta."
     },
     {
       "speaker": "Álvaro",
-      "text": "Y para rematar el menú técnico de la semana, ATAS soluciona la falta de coherencia en la generación de vídeo largo creando memorias implícitas de geometría 3D y eventos. Una auténtica pasada."
+      "text": "¿Lo de mirar la imagen solo cuando hace falta en Diffusion VLMs? ¡Una genialidad pura! Evitar procesar el 90% de tokens visuales repetidos ahorra dos tercios del cómputo manteniendo casi el 100% de la precisión."
     },
     {
       "speaker": "Elvira",
-      "text": "Sin duda, una semana repleta de arquitectura nativa de decisión e ingeniería de representación. ¡Vamos al grano a repasar los puntos clave de cada investigación!"
+      "text": "¡Exacto! Demuestra que a veces la innovación no es hacer modelos más grandes, sino hacer que piensen con más astucia cuándo necesitan ver y cuándo no. ¡Vamos al grano con las diapositivas!"
     }
   ],
   "slides": [
     {
       "slideNumber": 1,
-      "title": "Waypoint-OPD: Destilación de políticas RL mediante filtrado direccional",
+      "title": "Robótica con Conciencia Física sin Latencia",
       "paperId": "paper-1",
-      "paperTitle": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+      "paperTitle": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
       "keyPoints": [
-        "Identifica que los cambios de política finales tras RL pueden ocultar fluctuaciones contradictorias durante el entrenamiento.",
-        "Utiliza un checkpoint intermedio del profesor para medir el acuerdo direccional entre los cambios de política tempranos y tardíos.",
-        "Filtra la transferencia hacia el estudiante si los cambios intermedios y finales apuntan en direcciones opuestas."
+        "Módulo ligero de dinámicas físicas que predice RGB, profundidad y flujo óptico futuro.",
+        "Supervisión auxiliar mediante un World Model de vídeo congelado sin coste en inferencia online.",
+        "Rendimiento sobresaliente de hasta 99.3% de éxito en el benchmark LIBERO."
       ],
-      "takeaway": "Supera la destilación basada solo en el punto final de RL garantizando una transferencia consistente y sin ruido en tareas de razonamiento matemático y código."
+      "takeaway": "PDRVLA dota a los modelos de acción robótica de comprensión física del entorno evitando la latencia de generar vídeo en tiempo real."
     },
     {
       "slideNumber": 2,
-      "title": "OmniCompass: Benchmark holístico para comprensión omnimodal de vídeo",
+      "title": "Vídeo 360° Consistente Basado en Geometría 3D",
       "paperId": "paper-2",
-      "paperTitle": "OmniCompass: A Holistic Benchmark for Omni-Modal Video Grounding and Understanding",
+      "paperTitle": "OmniShowcase: Omnidirectional Subject-Consistent Video Generation from Multi-View Images",
       "keyPoints": [
-        "Introduce dos tracks de evaluación: OmniCompass-VL (visión-lenguaje) y OmniCompass-AV (audio-visual).",
-        "Evalúa tres tareas fundamentales: grounding temporal, grounding espacial y respuesta a preguntas (QA).",
-        "Evaluación masiva sobre 50 MLLMs revelando que los modelos open-source aún sufren en la integración conjunta audio-visual."
+        "Pipeline automatizado de síntesis de datos en trayectorias de cámara de 360 grados.",
+        "Condicionamiento geométrico mediante un tocadiscos de mapas de normales de superficie.",
+        "Superación del estado del arte en preservación de la identidad del objeto y consistencia 3D."
       ],
-      "takeaway": "Establece un estándar riguroso para diagnosticar las limitaciones actuales en la percepción y razonamiento espacio-temporal de modelos de vídeo."
+      "takeaway": "OmniShowcase resuelve la inconsistencia visual al rotar objetos 3D mediante el guiado explícito de normales de superficie."
     },
     {
       "slideNumber": 3,
-      "title": "Jeva: Modelos de Sistema 1 desde principios fundamentales",
+      "title": "Extracción Causal de Voz Ultraligera en Tiempo Real",
       "paperId": "paper-3",
-      "paperTitle": "Jeva: System One Models from First Principles",
+      "paperTitle": "Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes",
       "keyPoints": [
-        "Reemplaza la predicción autorregresiva de texto por una arquitectura de decisión nativa en una sola pasada.",
-        "Garantiza propiedades clave: invarianza ante permutación de opciones, escalabilidad en candidatos y detección explícita de opción nula.",
-        "Permite reutilizar la memoria de opciones entre solicitudes independientes, reduciendo drásticamente la latencia."
+        "Presentación de RealSSA, un benchmark realista con ruido complejo e interferencias dinámicas.",
+        "Arquitectura Falcon que realiza separación tiempo-frecuencia en un solo paso encoder-decoder.",
+        "Reducción del 91.9% en parámetros, 20.2x menos cómputo y 11.1x menor latencia en GPU."
       ],
-      "takeaway": "Demuestra que la toma de decisiones estructurada puede ser masivamente más rápida y consistente sin la necesidad de decodificar tokens secuencialmente."
+      "takeaway": "Falcon permite extraer la voz de un hablante objetivo en tiempo real dentro de dispositivos finales manteniendo alta calidad acústica."
     },
     {
       "slideNumber": 4,
-      "title": "VideoJev: Decisiones estructuradas y eficientes en comprensión de vídeo",
+      "title": "Generación Interactiva de Mundos de Forma Libre",
       "paperId": "paper-4",
-      "paperTitle": "VideoJev: System One Model for Video Understanding and Interaction",
+      "paperTitle": "Hy-Nomas: Towards Free-form Interactive World Generation",
       "keyPoints": [
-        "Adapta MLLMs sustituyendo la decodificación por cabeceras compartidas que puntúan intervalos temporales y opciones de texto.",
-        "Soporta inferencia en caché y compartida para consultas múltiples sobre un mismo historial de vídeo.",
-        "Alcanza reducciones de latencia de hasta 100x en QA de vídeo manteniendo el rendimiento de los modelos base."
+        "Base de difusión de 8B parámetros que soporta texto libre y control continuo de cámara.",
+        "Atención causal consciente de la acción que restringe las instrucciones a su ventana temporal.",
+        "Prompt Enhancer que traduce el historial multimodal en condiciones estructuradas."
       ],
-      "takeaway": "Aporta una interfaz de decisión reutilizable y ultrarrápida esencial para agentes visuales interactivos en tiempo real."
+      "takeaway": "Hy-Nomas habilita la creación e interacción continua con entornos virtuales manteniendo coherencia histórica y espacial."
     },
     {
       "slideNumber": 5,
-      "title": "MJev-Spatial: Inteligencia espacial de Sistema 1 mediante atención nativa",
+      "title": "Un Marco Unificado para Agentes de Trabajo Digital",
       "paperId": "paper-5",
-      "paperTitle": "MJev-Spatial: System One Spatial Intelligence via Native Attention Matching",
+      "paperTitle": "Work Agents: Systems, Capabilities, and Optimization",
       "keyPoints": [
-        "Unifica tareas de elección, predicción numérica y localización 2D dentro de un marco de clasificación directa.",
-        "Calcula puntuaciones usando las proyecciones Query-Key existentes sin añadir parámetros adicionales al backbone.",
-        "Aumenta la eficiencia de entrenamiento un 30.8% y ejecuta inferencias entre 2.5x y 5.6x más rápido que los modelos autorregresivos."
+        "Perspectiva a nivel de sistema que combina modelos base y entorns de ejecución (harness).",
+        "Clasificación del trabajo digital en 5 formas según su alcance, persistencia y apertura.",
+        "Identificación de 5 familias de capacidades y técnicas de optimización conjunta."
       ],
-      "takeaway": "Ofrece un rendimiento espacial líder en la industria eliminado por completo el coste de la decodificación de texto autorregresiva."
+      "takeaway": "Un marco conceptual clave para diseñar agentes capaces de ejecutar trabajo digital complejo, persistente y verificable."
     },
     {
       "slideNumber": 6,
-      "title": "ATAS: Framework de estado del mundo para generación de vídeo agentil",
+      "title": "Ruteo Visual Inteligente para Difusión en VLMs",
       "paperId": "paper-6",
-      "paperTitle": "Any Time, Any Space: A World-State-Centric Framework for Agentic Video Generation",
+      "paperTitle": "Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs",
       "keyPoints": [
-        "Mantiene una memoria de escena (geometría 3D) y una memoria de eventos (observaciones temporales) a partir del guion.",
-        "Verifica y actualiza el estado del mundo solo tras validar los clips generados mediante revisiones de consistencia.",
-        "Mejora significativamente la coherencia espacial y temporal en re-visitas a escenas y eventos a lo largo de secuencias de vídeo largas."
+        "LOWN decide dinámicamente en qué pasos de denoising procesar las imágenes.",
+        "Reutiliza predicciones anteriores si la predicción sin imagen coincide con la previa.",
+        "Ahorra el 64.7% de FLOPs de decodificación conservando el 99.6% del rendimiento original."
       ],
-      "takeaway": "Resuelve la falta de consistencia en generación de vídeo de larga duración acoplando la generación a una memoria de estado global."
+      "takeaway": "LOWN elimina el cómputo redundante de tokens visuales en modelos VLM de difusión sin necesidad de reentrenamiento."
     }
   ],
-  "generatedAt": "2026-10-18T23:52:00.584159",
+  "generatedAt": "2026-11-02T01:11:27.336159",
   "audioUrl": "/digest/weekly_podcast.mp3",
   "papers": [
     {
-      "id": "2610.21601",
-      "title": "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
-      "summary": "Policy-shift distillation reuses the difference between a teacher's log probabilities before and after reinforcement learning (RL) as supervision on student-generated trajectories. However, this endpoint policy shift cannot reveal whether local action preferences evolved consistently during teacher training. The same endpoint shift can result from early and late shifts that reinforce or partially cancel each other. We investigate whether agreement between early and late teacher policy shifts can guide selective transfer. We introduce Waypoint-guided On-Policy Distillation (Waypoint-OPD), which uses an intermediate teacher checkpoint from the same RL run to compare early and late shifts in relative action preferences at student-visited prefixes. We gate the endpoint shift according to the directional agreement between the early and late shifts, suppressing it when they point in opposing directions. Compared with endpoint-only transfer, our method requires only one additional frozen-teacher scoring pass. Using RL-trained Qwen3-4B teachers, we evaluate our method with Qwen3-8B, Qwen3-14B, and Qwen3-30B-A3B as student models in mathematical and code reasoning. In all six domain--student settings, Waypoint-OPD achieves the highest domain-average score among the compared distillation methods. Ablations with the Qwen3-8B student show that removing or shuffling gates reduces mathematical reasoning performance. These results support the use of directional agreement between early and late teacher policy shifts to weight the endpoint shift during student training.",
-      "upvotes": 668,
+      "id": "2610.37381",
+      "title": "PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations",
+      "summary": "Vision--Language--Action (VLA) models generate robot actions from visual observations and language instructions, but their understanding of physical dynamics remains limited. Video world models can capture scene dynamics, yet generating future videos introduces high latency into the control loop. We introduce PDRVLA, whose lightweight Physical Dynamics Module extracts physical tokens from vision--language features to condition action generation without online video generation. The module learns through direct prediction of future RGB, depth, and optical-flow features, with auxiliary supervision through a frozen pretrained video world model. Training relies entirely on publicly available data, expanded through human-to-robot synthesis, subtask annotation, and embodied chain-of-thought (ECoT) annotation. Across four simulation benchmarks, PDRVLA achieves success rates of 99.3% on LIBERO, 89.9% on LIBERO-Plus, 93.6% on RoboTwin~2.0, and 81.5% on SimplerEnv. Ablations show improved future prediction with world-model supervision and evaluate how subtask conditioning, future object-pose supervision, and ECoT training affect action success.",
+      "upvotes": 153,
       "authors": [
-        "Bingxi Hou",
-        "Guochao Jiang",
-        "Guofeng Quan",
-        "Weiqing Li"
+        "Hanqing Wang",
+        "Zhaotian Cai",
+        "Ruichuan An",
+        "Bohan Zeng"
       ],
-      "publishedAt": "2026-10-15T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.21601",
-      "pdfUrl": "https://arxiv.org/pdf/2610.21601.pdf",
-      "githubRepo": "https://github.com/hhhbxloveai/WaypointOPD"
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.37381",
+      "pdfUrl": "https://arxiv.org/pdf/2610.37381.pdf",
+      "githubRepo": null
     },
     {
-      "id": "2610.18829",
-      "title": "OmniCompass: A Holistic Benchmark for Omni-Modal Video Grounding and Understanding",
-      "summary": "With the rapid development of multimodal large language models (MLLMs), evaluating their video understanding capabilities has become increasingly important. Existing video understanding benchmarks cover only part of the evaluation dimensions, limiting systematic diagnosis of omni-modal video understanding. We introduce OmniCompass, a holistic benchmark for omni-modal video grounding and understanding. OmniCompass defines two evaluation tracks: OmniCompass-VL assesses vision-language models on tasks requiring visual evidence, while OmniCompass-AV assesses omni-modal models on tasks requiring joint audio-visual evidence. Each track includes three complementary tasks: temporal grounding (TG), spatial grounding (SG), and question answering (QA), assessing when a referenced target appears, where it is, and what happens. QA covers five perception and three reasoning categories in OmniCompass-VL, and three perception and two reasoning categories in OmniCompass-AV. OmniCompass-VL contains 820 videos and 2,460 instances across domains and three duration types: short, medium, and long. A narrative- and audio-rich subset forms OmniCompass-AV with 240 videos and 720 instances. Each instance is evaluated under two paired settings: text-only and text+image, specifying the same target through text and visual-language guidance. All instances are manually annotated with multi-round quality verification. Evaluations of 50 MLLMs show that open-source models still lag behind proprietary counterparts, particularly in audio-visual understanding. Precise temporal and spatial grounding remains challenging even for leading models, and their predictions still exhibit inconsistencies across the paired target specifications.",
-      "upvotes": 578,
+      "id": "2610.35684",
+      "title": "OmniShowcase: Omnidirectional Subject-Consistent Video Generation from Multi-View Images",
+      "summary": "Generating videos of a specific subject from a few reference images remains challenging when the camera reveals surfaces that are not visible in the input. Early subject-to-video (S2V) methods condition on a single reference image and must therefore infer the subject's unseen appearance and geometry as the viewpoint changes. To address this limitation, recent methods extend S2V to multiple reference views, providing more information about the subject from different viewpoints. However, they do not explicitly specify the 3D structure that connects these observations. In addition, existing training data do not guarantee that viewpoint changes preserve the same underlying 3D subject. We present OmniShowcase, built on two components: (i) a fully automated data synthesis pipeline that produces training videos along diverse camera trajectories, with viewpoint variation driven by underlying subject geometry, even spanning full 360-degree orbits; and (ii) a geometry-conditioning method that provides the video model with a turntable of surface-normal maps reconstructed from the reference views without requiring temporal alignment with the generated frames. We construct Showcase-4K, a corpus of 3D-asset-based videos covering twelve camera motions across 88 trajectory configurations with reconstruction-derived surface-normal conditioning, and ShowcaseBench, a held-out evaluation set with the source meshes and camera parameters used to render each video. Experiments show state-of-the-art subject identity and 3D consistency while maintaining competitive video quality and motion. Project page: justin4ai.github.io/OmniShowcase",
+      "upvotes": 135,
       "authors": [
-        "Xuyang Liu",
-        "Shihao Wang",
-        "Xinyu Wei",
-        "Minghan Li"
+        "Junyeong Ahn",
+        "Geonwoo Kim",
+        "Kinam Kim",
+        "Gihwi Kim"
       ],
-      "publishedAt": "2026-10-13T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.18829",
-      "pdfUrl": "https://arxiv.org/pdf/2610.18829.pdf",
-      "githubRepo": "https://github.com/PolyU-VCLab/OmniCompass"
+      "publishedAt": "2026-10-26T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.35684",
+      "pdfUrl": "https://arxiv.org/pdf/2610.35684.pdf",
+      "githubRepo": "https://github.com/justin4ai/OmniShowcase"
     },
     {
-      "id": "2610.18773",
-      "title": "Jeva: System One Models from First Principles",
-      "summary": "System one models enable direct, low-latency decision-making. Yet recent practice of predicting an answer from serialized text does not, by itself, respect the structure of a decision problem. We argue that current designs underemphasize four important structural requirements. (i) null-aware: Models should distinguish answer absence from uncertainty among candidates; (ii) permutation-invariant: Reordering alternatives should not change the decision; (iii) option-scalable: Growing candidate sets should not require redefining the output space; (iv) cacheable: Request-independent computation over recurring alternatives should be reusable across requests. We introduce Jeva, a decision-native architecture that addresses these requirements jointly. A shared encoder independently represents the request and each option, while a compact decision stack refines only the request state against immutable option memory. Symmetric aggregation yields permutation-equivariant probabilities; shared scoring accommodates variable-size candidate sets. A separate coverage estimate distinguishes answer absence from candidate competition, enabling explicit null outcomes. Request-independent option representations and layer projections support reuse across newly assembled sets. These mechanisms unify Choice, Noul, and Score outputs. Across evaluations, Jeva combines strong typed-decision performance with near-perfect null detection and no decision flips under any tested permutations. It scales to thousands of candidates and substantially reduces latency through cross-request reuse without changing decisions.",
-      "upvotes": 418,
+      "id": "2610.32749",
+      "title": "Efficient Streaming Audio-Visual Target Speaker Extraction for Real-World Acoustic Scenes",
+      "summary": "Streaming audio-visual target speaker extraction (AVTSE) is essential for latency-sensitive applications. However, current causal systems face two coupled gaps. First, standard benchmarks fix the number of speakers at two and ignore the near-/far-field interference, reverberation, and sudden noise of real scenes. Second, high-performance causal architectures are too heavy for edge deployment. Lightweight alternatives try to reclaim capacity by repeatedly invoking a small separator, which offsets the savings. To address the first gap, we release RealSSA, a realistic AVTSE benchmark consisting of RealSSA-Sim and RealSSA-Real. RealSSA-Sim provides controllable simulated scenes with 1--5 dynamic near-field interfering speakers; scenes with far-field interference additionally include 10--15 far-field interfering speakers. RealSSA-Real provides a held-out real-recorded evaluation set. To address the second gap, we propose Falcon, a causal AVTSE method. Its Separator performs multi-scale time-frequency separation in a single encoder--decoder pass. We train Falcon with an encoder-space speaker contrastive loss. This loss suppresses near-field leakage at zero inference cost and transfers across backbones. Falcon achieves state-of-the-art extraction quality on RealSSA-Sim, LRS2-2Mix, LRS3-2Mix, and VoxCeleb2-2Mix. Compared with the causal AV-TFGridNet baseline, it cuts parameters by 91.9%, computation by 20.2 times, and GPU inference latency by 11.1 times. Code and demo are available at https://cslikai.cn/Falcon/.",
+      "upvotes": 135,
       "authors": [
-        "Qi Li",
-        "Xinchao Wang"
+        "Wendi Sang",
+        "Kai Li",
+        "Yifan Li",
+        "Jianqiang Huang"
       ],
-      "publishedAt": "2026-10-13T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.18773",
-      "pdfUrl": "https://arxiv.org/pdf/2610.18773.pdf",
-      "githubRepo": "https://github.com/LiQiiiii/Jeva"
+      "publishedAt": "2026-10-23T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.32749",
+      "pdfUrl": "https://arxiv.org/pdf/2610.32749.pdf",
+      "githubRepo": "https://github.com/JusperLee/Falcon"
     },
     {
-      "id": "2610.18615",
-      "title": "VideoJev: System One Model for Video Understanding and Interaction",
-      "summary": "Visual agents must turn video observations into timely decisions to track progress and choose what to do next. Building on the emerging System One paradigm, we introduce VideoJev, a family of models that cast video understanding and interaction as structured decision tasks. We adapt pretrained multimodal large language models (MLLMs) by replacing autoregressive answer decoding with a shared head that scores temporal intervals and textual options against video evidence. These scores yield event spans or answer choices, unifying temporal grounding and multiple-choice video question answering. This combines the semantic flexibility of MLLMs with efficient decisions that agents can use directly. As an interaction unfolds, new goals and intermediate results prompt further queries about the same visual history. VideoJev therefore reuses visual computation through Cached inference for queries as they arrive and Joint inference for multiple queries in a single forward pass. Across three temporal grounding benchmarks, VideoJev-4B and VideoJev-35B-A3B improve mean mIoU over their backbones by 6.7 and 10.8 points, respectively, with measured inference speedups of 2.8-3.1times. On four video QA benchmarks, both achieve performance comparable to their backbones in Thinking mode, with measured inference speedups exceeding 100times. These results offer a unified, reusable decision interface for composing structured visual judgments into complex, open-ended workflows.",
-      "upvotes": 367,
+      "id": "2610.36729",
+      "title": "Hy-Nomas: Towards Free-form Interactive World Generation",
+      "summary": "Interactive world generation requires models to follow successive commands while preserving relevant history and action consequences. We present Hy-Nomas, a video world model with an 8B diffusion backbone that supports free-form text instructions and continuous camera control across multiple interaction turns. It generates variable-length segments conditioned on current inputs and cached history. Our central design aligns structured video captions with action-aware causal attention: descriptive context remains accessible across segments, while action instructions are restricted to their intended temporal windows. A vision-language Prompt Enhancer (PE) translates user requests and multimodal interaction histories into structured conditions for the next segment. A multi-stage curriculum progressively introduces causal generation, text interaction, camera control, and training on model-generated histories, followed by diffusion distillation. In human evaluation, Hy-Nomas shows superior performance over existing world models. We release model weights, code and benchmarks, together with a lightweight adaptation workflow, to support reproducible research on interactive world generation.",
+      "upvotes": 122,
       "authors": [
-        "Yuhan Zhu",
-        "Xiangyu Zeng",
-        "Qingyi Si",
-        "Chenxu Yang"
+        "Qiaoling Chen",
+        "Jiaxiang Cheng",
+        "Xueqing Deng",
+        "Tiankai Hang"
       ],
-      "publishedAt": "2026-10-13T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.18615",
-      "pdfUrl": "https://arxiv.org/pdf/2610.18615.pdf",
-      "githubRepo": "https://github.com/MCG-NJU/VideoJev"
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.36729",
+      "pdfUrl": "https://arxiv.org/pdf/2610.36729.pdf",
+      "githubRepo": "https://github.com/Tencent-Hunyuan/Hy-Nomas"
     },
     {
-      "id": "2610.22276",
-      "title": "MJev-Spatial: System One Spatial Intelligence via Native Attention Matching",
-      "summary": "Spatial intelligence lets an agent perceive and act in the physical world, and many of its judgments must be made at interaction rates: which spatial relation holds, how far an object is, or where to place it. Vision-language models (VLMs) produce these answers by free-form text generation, paying for autoregressive decoding and answer parsing even though the output space is compact: one of a few options, a scalar, or a 2D point. In light of this, we introduce MJev-Spatial, a System 1 multimodal decision model that tackles all three types of spatial understanding tasks within a unified classification framework. Specifically, MJev-Spatial treats each candidate as a class and scores it using the backbone's pretrained query and key projections, without adding parameters. The candidates are the given options for choice tasks, or value bins and image regions refined through coarse-to-fine classification for numerical and point prediction, respectively. At inference, each classification decision takes a single forward pass and generates no answer tokens. To train on heterogeneous spatial data efficiently, we supervise all coarse-to-fine stages jointly with teacher forcing in one forward pass, and combine this with length-aware global batching and cross-GPU load balancing, raising training throughput by 30.8% over the original batching strategy. Built on Qwen3.5-4B and trained on 12.3M question-answer pairs converted from existing spatial datasets, MJev-Spatial achieves the highest overall score (65.64%) among eight tested models, ranks first on seven of twelve benchmarks, and outperforms its unmodified autoregressive base model on all twelve, while running 2.5 times faster than the fastest autoregressive baseline and 5.6 times faster than the base model.",
-      "upvotes": 354,
+      "id": "2610.35845",
+      "title": "Work Agents: Systems, Capabilities, and Optimization",
+      "summary": "As foundation models evolve from information generation to digital work execution, agents are increasingly capable of completing complex tasks across tools, applications, and workflows. However, existing research lacks a unified perspective on how agents reliably accomplish delegated work. To address this gap, we present a work-centric, system-level perspective that views work agents as systems combining foundation models and runtime harnesses to execute tasks in stateful workspaces and deliver verifiable outcomes. We introduce two complementary dimensions, work persistence and work openness, to characterize working conditions, and classify digital work into five forms according to task scope and organization. Building on this framework, we identify five core capability families required for reliable work execution and examine approaches to model optimization, harness optimization, and their joint optimization. We further analyze existing evaluation methods and metrics from the perspective of work outcomes. Finally, we discuss future research directions, including sustained work delegation, adaptation to open environments, and the interaction between work execution and capability improvement. This paper provides a unified framework for understanding, optimizing, and evaluating work agents, supporting the development of systems capable of delivering reliable, verifiable, and practically valuable work outcomes.",
+      "upvotes": 116,
       "authors": [
-        "Luozheng Qin",
-        "Yuhan Zhu",
-        "Changhai Zhou",
-        "Qian Qiao"
+        "Zishan Xu",
+        "Enjun Du",
+        "Mingqi Gao",
+        "Cheng Yang"
       ],
-      "publishedAt": "2026-10-15T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.22276",
-      "pdfUrl": "https://arxiv.org/pdf/2610.22276.pdf",
-      "githubRepo": "https://github.com/Fr0zenCrane/MJev-Spatial"
+      "publishedAt": "2026-10-26T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.35845",
+      "pdfUrl": "https://arxiv.org/pdf/2610.35845.pdf",
+      "githubRepo": "https://github.com/EnjunDu/awesome-working-agent"
     },
     {
-      "id": "2610.20571",
-      "title": "Any Time, Any Space: A World-State-Centric Framework for Agentic Video Generation",
-      "summary": "Long-form agentic video generation must turn a screenplay into shots that remain spatially and temporally consistent across nonconsecutive requests. Passing prompts or recent frames between shots does not provide a shared spatial frame for revisiting a scene or a time-indexed record for replaying an earlier event. We present Any Time, Any Space (ATAS), which compiles a screenplay into shot requests with explicit location, camera, and event-time references. Before generation, it retrieves relevant evidence from a scene memory of registered static geometry and an event memory of dynamic observations indexed by scene, event, and time. After generation, ATAS reconstructs and registers the clip. It updates memory only when review and state checks accept the observation, while film delivery remains independent of memory admission. Across four video generators, ATAS improves all reported cross-shot consistency measures and achieves the highest aggregate benchmark score for each backbone. It also outperforms the compared agents and 3D-guided methods on target-image spatial revisit, leads three event-recapture criteria, and receives the highest human ratings on all six criteria. The video results and code are available on our project page: https://lhmd.top/atas/.",
-      "upvotes": 343,
+      "id": "2610.36671",
+      "title": "Look Only When Needed: Certificate-Guided Visual Routing for Efficient Diffusion VLMs",
+      "summary": "Diffusion vision-language models (DVLMs) process their entire input at every denoising step. Since visual tokens make up 89-97% of this input on the benchmarks we study, most of the decoding computation is spent repeatedly processing the same image. Visual token pruning methods partially relieve this burden by removing part of the visual tokens, but they lose the removed information and still process the remaining image at every step. To measure how often the image is actually needed, we compare LLaDA-V's predictions with and without the image at every decoding step and find that removing the image changes a token being unmasked at only 22.8% of steps on average and at as few as 7.9%. We therefore propose LOWN, a decoding method that decides at every step whether to process the image and how many tokens to unmask. LOWN predicts the masked tokens without the image and processes the image only when this prediction disagrees with the last image-conditioned prediction. Agreement certifies the earlier prediction for reuse, and the number of certified tokens sets how many are unmasked in that step. We further observe that the need for the image differs across benchmarks, so LOWN's adaptive decision is needed rather than a fixed schedule. Without training or a tuned threshold, LOWN retains 99.6% of LLaDA-V's score on ten benchmarks at 35.3% of the decoding FLOPs on average. LOWN also generalizes across LLaDA-based DVLMs, composes orthogonally with visual token pruning, and runs under key-value caching for further efficiency gains. Code and project page are available at https://hyeon9698.github.io/LOWN/",
+      "upvotes": 103,
       "authors": [
-        "Weijie Wang",
-        "Haomin Zhang",
-        "Ye Li",
-        "Akide Liu"
+        "Donghyeon Cho",
+        "Joowon Kim",
+        "Seungho Shin",
+        "Eunho Yang"
       ],
-      "publishedAt": "2026-10-14T00:00:00.000Z",
-      "hfUrl": "https://huggingface.co/papers/2610.20571",
-      "pdfUrl": "https://arxiv.org/pdf/2610.20571.pdf",
-      "githubRepo": "https://github.com/ziplab/ATAS"
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "hfUrl": "https://huggingface.co/papers/2610.36671",
+      "pdfUrl": "https://arxiv.org/pdf/2610.36671.pdf",
+      "githubRepo": "https://github.com/hyeon9698/LOWN"
     }
   ]
 }
